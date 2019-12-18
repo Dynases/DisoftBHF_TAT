@@ -74,7 +74,7 @@ Public Class F0_MCaja
         TablaPrincipal.Columns.Add("icid")
         TablaPrincipal.Columns.Add("img", Type.GetType("System.Byte[]"))
         '''''''''''Aqui inserto los movimientos ya insertados para modificarlos
-        Dim ProductosMovimientoSalida As DataTable = L_prConciliacionObtenerProductoTI0021Idnumi(Numi_Conciliacion) ''''Estado=3 Conciliacion Chofer
+        Dim ProductosMovimientoSalida As DataTable = L_prConciliacionObtenerProductoTI0021IdnumiCaja(Numi_Conciliacion) ''''Estado=3 Conciliacion Chofer
         For j As Integer = 0 To TablaPrincipal.Rows.Count - 1 Step 1
             Dim idprod As Integer = TablaPrincipal.Rows(j).Item("canumi")
             Dim result As DataRow() = ProductosMovimientoSalida.Select("iccprod=" + Str(idprod))
