@@ -514,7 +514,7 @@ Public Class F0_MCaja
     Public Sub cargarDetalleConciliacion()
         Dim dt As New DataTable
 
-        dt = L_prObtenerDetalleChofer(Numi_Chofer, tbFecha.Value.ToString("yyyy/MM/dd"))
+        dt = L_prObtenerDetalleChofer(Numi_Chofer, tbFecha.Value.ToString("yyyy/MM/dd"), lbconciliacion.Text)
         grtotalpedidos.DataSource = dt
         grtotalpedidos.RetrieveStructure()
         grtotalpedidos.AlternatingColors = True

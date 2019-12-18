@@ -1161,7 +1161,7 @@ salirIf:
 
     Private Sub CargarDespachoDeChofer(codChofer As Integer)
         Try
-            Dim listResult = New LPedido().ListarDespachoXProductoDeChofer(codChofer)
+            Dim listResult = New LPedido().ListarDespachoXProductoDeChoferSalida(codChofer)
             If (listResult.Count > 0) Then
                 Dim info As New TaskDialogInfo("¿desea carga los producto de despacho del chofer?".ToUpper,
                                        eTaskDialogIcon.Information, "pregunta".ToUpper,

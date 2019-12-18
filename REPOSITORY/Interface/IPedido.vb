@@ -6,4 +6,5 @@ Public Interface IPedido
     Function GuardarPedidoDeChofer(listIdPedido As List(Of Integer), idChofer As Integer) As Boolean
     Function ListarDespachoXClienteDeChofer(idChofer As Integer) As List(Of RDespachoxCliente)
     Function ListarDespachoXProductoDeChofer(idChofer As Integer) As List(Of RDespachoXProducto)
+    Function ListarDespachoXProductoDeChoferSalida(idChofer As Integer) As List(Of RDespachoXProducto)
 End Interface

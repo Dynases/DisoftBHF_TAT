@@ -98,6 +98,26 @@ Public Class RPedido
         Try
             Using db = GetSchema()
                 Dim listResult = (From a In db.VR_GO_DespachoXProducto
+                                  Where a.oaccbnumi = idChofer
+                                  Select New RDespachoXProducto With {
+                                      .oaccbnumi = a.oaccbnumi,
+                                      .canumi = a.canumi,
+                                      .cacod = a.cacod,
+                                      .cadesc = a.cadesc,
+                                      .cadesc2 = a.cadesc2,
+                                      .categoria = a.categoria,
+                                      .obpcant = a.obpcant
+                                      }).ToList()
+                Return listResult
+            End Using
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+        End Try
+    End Function
+    Public Function ListarDespachoXProductoDeChoferSalida(idChofer As Integer) As List(Of RDespachoXProducto) Implements IPedido.ListarDespachoXProductoDeChoferSalida
+        Try
+            Using db = GetSchema()
+                Dim listResult = (From a In db.VR_GO_DespachoXProducto
                                   Where a.oaccbnumi = idChofer And a.oacnconc = 0
                                   Select New RDespachoXProducto With {
                                       .oaccbnumi = a.oaccbnumi,
