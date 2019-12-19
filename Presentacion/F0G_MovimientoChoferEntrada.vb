@@ -116,7 +116,8 @@ Public Class F0G_MovimientoChoferEntrada
         cbConcepto.ReadOnly = False
         tbObservacion.ReadOnly = False
         tbFecha.IsInputReadOnly = False
-        grmovimiento.Enabled = False
+        'grmovimiento.Enabled = False
+        grmovimiento.Enabled = True
 
         MBtGrabar.Enabled = True
     End Sub

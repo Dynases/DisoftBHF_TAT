@@ -14,7 +14,7 @@ Public Class RPedido
                                   Join a1 In db.TO001A On a.oanumi Equals a1.oaato1numi
                                   Join b In db.TC004 On a.oaccli Equals b.ccnumi
                                   Join c In db.TC002 On a1.oaanumiprev Equals c.cbnumi
-                                  Where a.oaest = ENEstadoPedido.DICTADO And
+                                  Where a.oaest = ENEstadoPedido.DICTADO And a.oaap = 1 And
                                       listIdZona.Contains(a.oazona) And
                                       Not db.TO001C.Select(Function(aa) aa.oacoanumi).ToList().Contains(a.oanumi)
                                   Select New VPedido_Dispatch With {

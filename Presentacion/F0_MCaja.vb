@@ -745,11 +745,11 @@ Public Class F0_MCaja
             Return False
 
         End If
-        If (_fnValidarTotal() = False) Then
-            Dim img As Bitmap = New Bitmap(My.Resources.Mensaje, 50, 50)
-            ToastNotification.Show(Me, "ERROR:  LA CANTIDAD DE PRODUCTO SACADOS ES DISTINTO A LOS VENDIDOS ".ToUpper, img, 2000, eToastGlowColor.Red, eToastPosition.BottomCenter)
-            Return False
-        End If
+        'If (_fnValidarTotal() = False) Then
+        '    Dim img As Bitmap = New Bitmap(My.Resources.Mensaje, 50, 50)
+        '    ToastNotification.Show(Me, "ERROR:  LA CANTIDAD DE PRODUCTO SACADOS ES DISTINTO A LOS VENDIDOS ".ToUpper, img, 2000, eToastGlowColor.Red, eToastPosition.BottomCenter)
+        '    Return False
+        'End If
 
         Return True
     End Function

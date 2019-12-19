@@ -47,6 +47,9 @@ Public Class F02_Pedido
 
         tbFechaDel.Value = Now.Date
         tbFechaAl.Value = Now.Date
+
+        'Ocultar boton Eliminar
+        MBtEliminar.Visible = False
     End Sub
     Private Sub _pCambiarFuente()
         Dim fuente As New Font("Tahoma", gi_fuenteTamano, FontStyle.Regular)
@@ -1146,6 +1149,16 @@ Public Class F02_Pedido
             Else
                 Tb_Estado.Value = True
             End If
+            If .GetValue("oaap") = 2 Then
+                MRlAccion.Text = "ANULADO"
+                MBtModificar.Enabled = False
+                MBtGrabar.Enabled = False
+            Else
+                MRlAccion.Text = "VIGENTE"
+                MBtModificar.Enabled = True
+                'MBtGrabar.Enabled = True
+            End If
+
             cbDistribuidor.Clear()
             cbDistribuidor.Value = .GetValue("oarepa")
             cbPreVendedor.Clear()
@@ -1836,7 +1849,19 @@ Public Class F02_Pedido
     End Sub
 
     Private Sub MBtModificar_Click(sender As Object, e As EventArgs) Handles MBtModificar.Click
-        _PModificarRegistro()
+        Dim dt1 As New DataTable
+        dt1 = L_VerificarPedidoConsolidado(Tb_Id.Text)
+        If dt1.Rows.Count > 0 Then
+            If dt1.Rows(0).Item("ieest") = 2 Or dt1.Rows(0).Item("ieest") = 3 Then
+                Dim img As Bitmap = New Bitmap(My.Resources.Mensaje, 50, 50)
+                ToastNotification.Show(Me, "Este pedido ya fue consolidado no puede modificarlo".ToUpper, img, 3000, eToastGlowColor.Red, eToastPosition.TopCenter)
+            Else
+                _PModificarRegistro()
+            End If
+        Else
+            _PModificarRegistro()
+        End If
+
     End Sub
 
     Private Sub MBtEliminar_Click(sender As Object, e As EventArgs) Handles MBtEliminar.Click
@@ -2142,8 +2167,8 @@ Public Class F02_Pedido
 	                                                   inner join TC0051 d on a.lazona=d.cenum and d.cecon=2",
                                                       "b.lccbnumi=" + cbDistribuidor.Value.ToString)
                 If (dt.Rows.Count > 0) Then
-                    Tb_CliCodZona.Text = dt.Rows(0).Item("lcnumi").ToString
-                    Tb_Zona.Text = dt.Rows(0).Item("cedesc").ToString
+                    'Tb_CliCodZona.Text = dt.Rows(0).Item("lcnumi").ToString
+                    'Tb_Zona.Text = dt.Rows(0).Item("cedesc").ToString
                 End If
             End If
         End If

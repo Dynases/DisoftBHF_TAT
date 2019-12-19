@@ -1150,6 +1150,18 @@ Public Class AccesoLogica
         _Err = D_Modificar_Datos("TO001", Sql, _where)
     End Sub
 
+    Public Shared Function L_VerificarPedidoConsolidado(_IdPedido As String) As DataTable
+        Dim _Tabla As DataTable
+        Dim _Where As String
+
+        _Where = " oacoanumi=oanumi and  ieconcti2= oacnconc and oacoanumi=" + _IdPedido
+
+        Dim campos As String = "oanumi, ieconcti2, ieest"
+        _Tabla = D_Datos_Tabla(campos, "TO001,TO001C,TM0012", _Where + " order by oanumi desc")
+        Return _Tabla
+
+    End Function
+
     Public Shared Sub L_PedidoCabacera_ModificarExtencion(to1numi As String, numiprev As String)
         Dim _Err As Boolean
         Dim Sql, _where As String
