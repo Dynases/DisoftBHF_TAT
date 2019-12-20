@@ -470,7 +470,9 @@ Public Class F0G_MovimientoChoferEntrada
         If (_fnAccesible()) Then
             If (cbConcepto.Value = 10) Then
                 If (e.Column.Index = grdetalle.RootTable.Columns("DEVOLUCION").Index) Then
-                    e.Cancel = False
+                    'e.Cancel = False
+                    'Lo cambiamos para que ya no modifiquen la grilla porque ahora calcula automáticamente
+                    e.Cancel = True
                 Else
                     e.Cancel = True
                 End If

@@ -130,7 +130,7 @@ Partial Class F0_MCaja
         '
         'TxtNombreUsu
         '
-        Me.TxtNombreUsu.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.TxtNombreUsu.Margin = New System.Windows.Forms.Padding(2)
         Me.TxtNombreUsu.ReadOnly = True
         Me.TxtNombreUsu.Size = New System.Drawing.Size(135, 23)
         Me.TxtNombreUsu.Text = "DEFAULT"
@@ -181,7 +181,7 @@ Partial Class F0_MCaja
         '
         Me.PanelContent.Controls.Add(Me.GroupPanel4)
         Me.PanelContent.Controls.Add(Me.Panel3)
-        Me.PanelContent.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.PanelContent.Margin = New System.Windows.Forms.Padding(2)
         Me.PanelContent.Size = New System.Drawing.Size(952, 450)
         Me.PanelPrincipal.Controls.SetChildIndex(Me.PanelInferior, 0)
         Me.PanelPrincipal.Controls.SetChildIndex(Me.PanelUsuario, 0)
@@ -265,7 +265,7 @@ Partial Class F0_MCaja
         Me.GroupPanel4.Dock = System.Windows.Forms.DockStyle.Fill
         Me.GroupPanel4.Font = New System.Drawing.Font("Georgia", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GroupPanel4.Location = New System.Drawing.Point(0, 244)
-        Me.GroupPanel4.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.GroupPanel4.Margin = New System.Windows.Forms.Padding(2)
         Me.GroupPanel4.Name = "GroupPanel4"
         Me.GroupPanel4.Size = New System.Drawing.Size(952, 206)
         '
@@ -380,7 +380,7 @@ Partial Class F0_MCaja
         Me.grtotalpedidos.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.grtotalpedidos.HeaderFormatStyle.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.grtotalpedidos.Location = New System.Drawing.Point(0, 0)
-        Me.grtotalpedidos.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.grtotalpedidos.Margin = New System.Windows.Forms.Padding(2)
         Me.grtotalpedidos.Name = "grtotalpedidos"
         Me.grtotalpedidos.Office2007ColorScheme = Janus.Windows.GridEX.Office2007ColorScheme.Custom
         Me.grtotalpedidos.Office2007CustomColor = System.Drawing.Color.DodgerBlue
@@ -398,7 +398,7 @@ Partial Class F0_MCaja
         Me.Panel3.Controls.Add(Me.GroupPanel2)
         Me.Panel3.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel3.Location = New System.Drawing.Point(0, 0)
-        Me.Panel3.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.Panel3.Margin = New System.Windows.Forms.Padding(2)
         Me.Panel3.Name = "Panel3"
         Me.Panel3.Size = New System.Drawing.Size(952, 244)
         Me.Panel3.TabIndex = 3
@@ -412,7 +412,7 @@ Partial Class F0_MCaja
         Me.GroupPanel3.Dock = System.Windows.Forms.DockStyle.Fill
         Me.GroupPanel3.Font = New System.Drawing.Font("Georgia", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GroupPanel3.Location = New System.Drawing.Point(398, 0)
-        Me.GroupPanel3.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.GroupPanel3.Margin = New System.Windows.Forms.Padding(2)
         Me.GroupPanel3.Name = "GroupPanel3"
         Me.GroupPanel3.Size = New System.Drawing.Size(554, 244)
         '
@@ -464,7 +464,7 @@ Partial Class F0_MCaja
         Me.SuperTabControl2.Controls.Add(Me.SuperTabControlPanel3)
         Me.SuperTabControl2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.SuperTabControl2.Location = New System.Drawing.Point(0, 0)
-        Me.SuperTabControl2.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.SuperTabControl2.Margin = New System.Windows.Forms.Padding(2)
         Me.SuperTabControl2.Name = "SuperTabControl2"
         Me.SuperTabControl2.ReorderTabsEnabled = True
         Me.SuperTabControl2.SelectedTabFont = New System.Drawing.Font("Georgia", 9.0!, System.Drawing.FontStyle.Bold)
@@ -480,7 +480,7 @@ Partial Class F0_MCaja
         Me.SuperTabControlPanel3.Controls.Add(Me.grdetalle)
         Me.SuperTabControlPanel3.Dock = System.Windows.Forms.DockStyle.Fill
         Me.SuperTabControlPanel3.Location = New System.Drawing.Point(0, 26)
-        Me.SuperTabControlPanel3.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.SuperTabControlPanel3.Margin = New System.Windows.Forms.Padding(2)
         Me.SuperTabControlPanel3.Name = "SuperTabControlPanel3"
         Me.SuperTabControlPanel3.Size = New System.Drawing.Size(548, 196)
         Me.SuperTabControlPanel3.TabIndex = 1
@@ -492,7 +492,7 @@ Partial Class F0_MCaja
         Me.grdetalle.Dock = System.Windows.Forms.DockStyle.Fill
         Me.grdetalle.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.grdetalle.Location = New System.Drawing.Point(0, 0)
-        Me.grdetalle.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.grdetalle.Margin = New System.Windows.Forms.Padding(2)
         Me.grdetalle.Name = "grdetalle"
         Me.grdetalle.Size = New System.Drawing.Size(548, 196)
         Me.grdetalle.TabIndex = 0
@@ -521,7 +521,7 @@ Partial Class F0_MCaja
         Me.GroupPanel2.Dock = System.Windows.Forms.DockStyle.Left
         Me.GroupPanel2.Font = New System.Drawing.Font("Georgia", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GroupPanel2.Location = New System.Drawing.Point(0, 0)
-        Me.GroupPanel2.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.GroupPanel2.Margin = New System.Windows.Forms.Padding(2)
         Me.GroupPanel2.Name = "GroupPanel2"
         Me.GroupPanel2.Size = New System.Drawing.Size(398, 244)
         '
@@ -639,7 +639,7 @@ Partial Class F0_MCaja
         Me.lbconciliacion.Font = New System.Drawing.Font("Microsoft Sans Serif", 19.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lbconciliacion.ForeColor = System.Drawing.Color.DarkOliveGreen
         Me.lbconciliacion.Location = New System.Drawing.Point(104, 81)
-        Me.lbconciliacion.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.lbconciliacion.Margin = New System.Windows.Forms.Padding(2)
         Me.lbconciliacion.Name = "lbconciliacion"
         Me.lbconciliacion.Size = New System.Drawing.Size(131, 37)
         Me.lbconciliacion.TabIndex = 16
@@ -726,7 +726,7 @@ Partial Class F0_MCaja
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(984, 561)
-        Me.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.Margin = New System.Windows.Forms.Padding(2)
         Me.Name = "F0_MCaja"
         Me.Text = "F0_MCaja"
         Me.Controls.SetChildIndex(Me.PanelPrincipal, 0)

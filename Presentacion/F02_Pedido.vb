@@ -1051,9 +1051,10 @@ Public Class F02_Pedido
         Btn_TerminarAdd.Image = My.Resources.GRABAR
 
         JGr_Clientes.Enabled = False
-        JGr_DetallePedido.Enabled = False
+        'JGr_DetallePedido.Enabled = False
         JGr_Productos.Enabled = False
         JGr_TipoProd.Enabled = False
+
 
 
         _PLimpiarErrores()
@@ -1797,11 +1798,17 @@ Public Class F02_Pedido
     End Sub
 
     Private Sub JGr_DetallePedido_EditingCell(sender As Object, e As EditingCellEventArgs) Handles JGr_DetallePedido.EditingCell
-        If e.Column.Index <> 3 Then
+        If (_fnAccesible()) Then
+            If e.Column.Index <> 3 Then
+                e.Cancel = True
+            End If
+        Else
             e.Cancel = True
         End If
     End Sub
-
+    Public Function _fnAccesible()
+        Return Tb_Fecha.Enabled = True
+    End Function
     Private Sub JGr_TipoProd_EditingCell(sender As Object, e As EditingCellEventArgs) Handles JGr_TipoProd.EditingCell
         e.Cancel = True
     End Sub

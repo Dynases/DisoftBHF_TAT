@@ -187,7 +187,7 @@ Public Class F0_MCaja
         End With
         With grdetalle.RootTable.Columns("MOVIL")
             .Width = 150
-            .Visible = True
+            .Visible = False
             .FormatString = "0.00"
             .TextAlignment = TextAlignment.Far
             .Caption = "MOVIL"
@@ -198,7 +198,7 @@ Public Class F0_MCaja
             .Visible = True
             .FormatString = "0.00"
             .TextAlignment = TextAlignment.Far
-            .Caption = "PC"
+            .Caption = "ENTREGADOS"
             '.CellStyle.BackColor = Color.Gold
         End With
         With grdetalle.RootTable.Columns("DEVOLUCION")
@@ -235,7 +235,7 @@ Public Class F0_MCaja
             .Width = 80
             .Caption = "ESTADO".ToUpper
             .CellStyle.ImageHorizontalAlignment = ImageHorizontalAlignment.Center
-            .Visible = True
+            .Visible = False
         End With
         With grdetalle
             .GroupByBoxVisible = False
@@ -467,7 +467,7 @@ Public Class F0_MCaja
             .FormatString = "0.00"
         End With
         With grtotalpedidos.RootTable.Columns("contado")
-            .Caption = "CONTADO"
+            .Caption = "EFECTIVO"
             .Width = 120
             .AggregateFunction = AggregateFunction.Sum
             .Visible = True
@@ -477,7 +477,8 @@ Public Class F0_MCaja
             .Caption = "CREDITO"
             .Width = 120
             .AggregateFunction = AggregateFunction.Sum
-            .Visible = (gi_vcre2 = 1)
+            '.Visible = (gi_vcre2 = 1)
+            .Visible = False
             .FormatString = "0.00"
         End With
         With grtotalpedidos.RootTable.Columns("oarepa")
@@ -561,7 +562,7 @@ Public Class F0_MCaja
             .AggregateFunction = AggregateFunction.Sum
         End With
         With grtotalpedidos.RootTable.Columns("contado")
-            .Caption = "CONTADO"
+            .Caption = "EFECTIVO"
             .Width = 120
             .Visible = True
             .FormatString = "0.00"
@@ -570,7 +571,8 @@ Public Class F0_MCaja
         With grtotalpedidos.RootTable.Columns("credito")
             .Caption = "CREDITO"
             .Width = 120
-            .Visible = (gi_vcre2 = 1)
+            '.Visible = (gi_vcre2 = 1)
+            .Visible = False
             .FormatString = "0.00"
             .AggregateFunction = AggregateFunction.Sum
         End With
@@ -766,6 +768,9 @@ Public Class F0_MCaja
         P_prArmarAyudaConciliacion()
         cargarDetalleConciliacion()
         _prCrearTablaConciliacion()
+
+        'Colocar el total del contado en el tbdRecibido.Text
+        tbdRecibido.Text = grtotalpedidos.GetTotal(grtotalpedidos.RootTable.Columns("contado"), AggregateFunction.Sum)
     End Sub
 
     Private Sub F0_Caja_Load(sender As Object, e As EventArgs) Handles MyBase.Load
