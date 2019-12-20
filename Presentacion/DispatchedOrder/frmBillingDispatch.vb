@@ -30,6 +30,48 @@ Public Class frmBillingDispatch
 
     Private Sub btFacturar_Click(sender As Object, e As EventArgs) Handles btFacturar.Click
         Try
+            Dim idChofer = Me.cbChoferes.Value
+            Dim idDespacho = dgjPedido.GetValue("Id")
+            If (Not IsNumeric(idChofer)) Then
+                Throw New Exception("Debe seleccionar un chofer.")
+            End If
+            If (Convert.ToInt32(idChofer) = ENCombo.ID_SELECCIONAR) Then
+                Throw New Exception("Debe seleccionar un chofer.")
+            End If
+
+            Dim checks = Me.dgjPedido.GetCheckedRows()
+            Dim listIdPedido = checks.Select(Function(a) Convert.ToInt32(a.Cells("Id").Value)).ToList()
+            For Each idPedido As Integer In listIdPedido
+                Dim listResult = New LPedido().ListarDespachoXNotaVentaDeChofer(idChofer, idPedido)
+                If (listResult.Count = 0) Then
+                    Throw New Exception("No registros para generar el reporte.")
+                End If
+                If Not IsNothing(P_Global.Visualizador) Then
+                    P_Global.Visualizador.Close()
+                End If
+                Dim _Hora As String = Now.Hour.ToString + ":" + Now.Minute.ToString
+                Dim _Total As Decimal = listResult.Item(0).Total
+                Dim _Decimal As Decimal = _Total - Math.Truncate(_Total)
+                Dim _TotalDeciaml As String = CDbl(_Decimal) * 100
+
+                Dim Literal As String = UConvertirLiteral.A_fnConvertirLiteral(CDbl(_Total) - CDbl(_Decimal)) + "  " + IIf(_TotalDeciaml.Equals("0"), "00", _TotalDeciaml) + "/100 Bolivianos"
+
+                P_Global.Visualizador = New Visualizador
+                Dim objrep As New DespachoNotaVentaXCliente
+
+                objrep.SetDataSource(listResult)
+                objrep.SetParameterValue("Hora", _Hora)
+                objrep.SetParameterValue("Literal1", Literal)
+                objrep.SetParameterValue("Usuario", P_Global.gs_user)
+
+                objrep.PrintOptions.PrinterName = "EPSON TM-T2011 Receipt"
+                objrep.PrintToPrinter(1, False, 1, 1)
+
+                'P_Global.Visualizador.CRV1.ReportSource = objrep
+                'P_Global.Visualizador.Show()
+                'P_Global.Visualizador.BringToFront()
+            Next
+            'Dim listResult = New LPedido().ListarDespachoXNotaVenta(idChofer, listIdPedido)
 
         Catch ex As Exception
             MostrarMensajeError(ex.Message)
@@ -220,11 +262,13 @@ Public Class frmBillingDispatch
                 .Position = 3
             End With
 
-            With dgjPedido.RootTable.Columns("EstaFacturado")
+            dgjPedido.RootTable.Columns.Add(New GridEXColumn("Check"))
+            With dgjPedido.RootTable.Columns("Check")
                 .Caption = "Facturado"
                 .Width = 80
-                .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Center
-                .Visible = True
+                .ShowRowSelector = True
+                .UseHeaderSelector = True
+                .FilterEditType = FilterEditType.NoEdit
                 .Position = 4
             End With
 

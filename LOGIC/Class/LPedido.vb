@@ -54,4 +54,11 @@ Public Class LPedido
             Throw New Exception(ex.Message)
         End Try
     End Function
+    Public Function ListarDespachoXNotaVentaDeChofer(idChofer As Integer, idDespacho As Integer) As List(Of RDespachoNotaVentaXCliente)
+        Try
+            Return iPedido.ListarDespachXoNotaVentaDeChofer(idChofer, idDespacho)
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+        End Try
+    End Function
 End Class

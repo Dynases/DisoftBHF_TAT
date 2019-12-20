@@ -117,6 +117,7 @@
         <EntityTypeShape EntityType="BDDistBHFModel.Vr_VentasVendedor12Meses" Width="1.5" PointX="30.75" PointY="26.75" />
         <EntityTypeShape EntityType="BDDistBHFModel.Vr_VentasVendidas" Width="1.5" PointX="26.75" PointY="30.75" />
         <EntityTypeShape EntityType="BDDistBHFModel.VR_VistaPedido_PrecioCosto" Width="1.5" PointX="8.75" PointY="31.75" />
+        <EntityTypeShape EntityType="BDDistBHFModel.VR_GO_DespachoNotaVentaXCliente" Width="1.5" PointX="11.375" PointY="31.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -64,6 +64,7 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Class\UConvertirLiteral.vb" />
     <Compile Include="Enum\ENMensaje.vb" />
     <Compile Include="Enum\ENCombo.vb" />
     <Compile Include="Enum\ENTipoPersonal.vb" />

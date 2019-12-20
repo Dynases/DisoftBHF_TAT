@@ -134,4 +134,28 @@ Public Class RPedido
             Throw New Exception(ex.Message)
         End Try
     End Function
+
+    Public Function ListarDespachXoNotaVentaDeChofer(idChofer As Integer, idDespacho As Integer) As List(Of RDespachoNotaVentaXCliente) Implements IPedido.ListarDespachXoNotaVentaDeChofer
+        Try
+            Using db = GetSchema()
+                Dim listResult = (From a In db.VR_GO_DespachoNotaVentaXCliente
+                                  Where a.oaest = ENEstadoPedido.DICTADO And a.oaccbnumi = idChofer And a.oanumi = idDespacho
+                                  Select New RDespachoNotaVentaXCliente With {
+                                      .oanumi = a.oanumi,
+                                      .oafdoc = a.oafdoc,
+                                      .ccdesc = a.ccdesc,
+                                      .cbdesc = a.cbdesc,
+                                      .canumi = a.canumi,
+                                      .cadesc = a.cadesc,
+                                      .obpcant = a.obpcant,
+                                      .obpbase = a.obpbase,
+                                      .obptot = a.obptot,
+                                      .Total = a.Total
+                                      }).ToList()
+                Return listResult
+            End Using
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+        End Try
+    End Function
 End Class

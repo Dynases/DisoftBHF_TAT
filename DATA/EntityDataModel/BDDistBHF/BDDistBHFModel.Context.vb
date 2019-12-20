@@ -136,6 +136,7 @@ Partial Public Class BDDistBHFEntities
     Public Overridable Property Vr_VentasVendedor12Meses() As DbSet(Of Vr_VentasVendedor12Meses)
     Public Overridable Property Vr_VentasVendidas() As DbSet(Of Vr_VentasVendidas)
     Public Overridable Property VR_VistaPedido_PrecioCosto() As DbSet(Of VR_VistaPedido_PrecioCosto)
+    Public Overridable Property VR_GO_DespachoNotaVentaXCliente() As DbSet(Of VR_GO_DespachoNotaVentaXCliente)
 
     Public Overridable Function PlanillaSueldo(fecha As Nullable(Of Date)) As ObjectResult(Of PlanillaSueldo_Result)
         Dim fechaParameter As ObjectParameter = If(fecha.HasValue, New ObjectParameter("fecha", fecha), New ObjectParameter("fecha", GetType(Date)))
@@ -903,7 +904,7 @@ Partial Public Class BDDistBHFEntities
         Return DirectCast(Me, IObjectContextAdapter).ObjectContext.ExecuteFunction("sp_Mam_TM001", tipoParameter, ibidParameter, ibfdocParameter, ibconcepParameter, ibobsParameter, ibestParameter, ibalmParameter, ibiddcParameter, ibidchofParameter, ibidventParameter, ibidconcilParameter, ibuactParameter, choferParameter, conceptoParameter)
     End Function
 
-    Public Overridable Function sp_Mam_TM001SalidaChofer(tipo As Nullable(Of Integer), ibid As Nullable(Of Integer), ibfdoc As Nullable(Of Date), ibconcep As Nullable(Of Integer), ibobs As String, ibest As Nullable(Of Integer), ibalm As Nullable(Of Integer), ibiddc As Nullable(Of Integer), ibidchof As Nullable(Of Integer), ibidvent As Nullable(Of Integer), ibidconcil As Nullable(Of Integer), ibuact As String, chofer As Nullable(Of Integer), concepto As Nullable(Of Integer)) As Integer
+    Public Overridable Function sp_Mam_TM001SalidaChofer(tipo As Nullable(Of Integer), ibid As Nullable(Of Integer), ibfdoc As Nullable(Of Date), ibconcep As Nullable(Of Integer), ibobs As String, ibest As Nullable(Of Integer), ibalm As Nullable(Of Integer), ibiddc As Nullable(Of Integer), ibidchof As Nullable(Of Integer), ibidvent As Nullable(Of Integer), ibidconcil As Nullable(Of Integer), ibuact As String, chofer As Nullable(Of Integer), concepto As Nullable(Of Integer), nconci As Nullable(Of Integer)) As Integer
         Dim tipoParameter As ObjectParameter = If(tipo.HasValue, New ObjectParameter("tipo", tipo), New ObjectParameter("tipo", GetType(Integer)))
 
         Dim ibidParameter As ObjectParameter = If(ibid.HasValue, New ObjectParameter("ibid", ibid), New ObjectParameter("ibid", GetType(Integer)))
@@ -932,7 +933,9 @@ Partial Public Class BDDistBHFEntities
 
         Dim conceptoParameter As ObjectParameter = If(concepto.HasValue, New ObjectParameter("concepto", concepto), New ObjectParameter("concepto", GetType(Integer)))
 
-        Return DirectCast(Me, IObjectContextAdapter).ObjectContext.ExecuteFunction("sp_Mam_TM001SalidaChofer", tipoParameter, ibidParameter, ibfdocParameter, ibconcepParameter, ibobsParameter, ibestParameter, ibalmParameter, ibiddcParameter, ibidchofParameter, ibidventParameter, ibidconcilParameter, ibuactParameter, choferParameter, conceptoParameter)
+        Dim nconciParameter As ObjectParameter = If(nconci.HasValue, New ObjectParameter("nconci", nconci), New ObjectParameter("nconci", GetType(Integer)))
+
+        Return DirectCast(Me, IObjectContextAdapter).ObjectContext.ExecuteFunction("sp_Mam_TM001SalidaChofer", tipoParameter, ibidParameter, ibfdocParameter, ibconcepParameter, ibobsParameter, ibestParameter, ibalmParameter, ibiddcParameter, ibidchofParameter, ibidventParameter, ibidconcilParameter, ibuactParameter, choferParameter, conceptoParameter, nconciParameter)
     End Function
 
     Public Overridable Function sp_Mam_TO004(tipo As Nullable(Of Integer), ohnumi As Nullable(Of Integer), ohfec As Nullable(Of Date), ohconc As Nullable(Of Integer), ohest As String, ohuact As String, ojnumi As Nullable(Of Integer), cliente As Nullable(Of Integer), producto As Nullable(Of Integer)) As Integer
@@ -957,7 +960,7 @@ Partial Public Class BDDistBHFEntities
         Return DirectCast(Me, IObjectContextAdapter).ObjectContext.ExecuteFunction("sp_Mam_TO004", tipoParameter, ohnumiParameter, ohfecParameter, ohconcParameter, ohestParameter, ohuactParameter, ojnumiParameter, clienteParameter, productoParameter)
     End Function
 
-    Public Overridable Function sp_Mam_TO005(tipo As Nullable(Of Integer), olnumi As Nullable(Of Integer), olnumichof As Nullable(Of Integer), olnumiconci As Nullable(Of Integer), olfecha As Nullable(Of Date), oluact As String, pedido As Nullable(Of Integer), zona As Nullable(Of Integer), mrec As Nullable(Of Decimal), cliente As Nullable(Of Integer), fechai As Nullable(Of Date), fechaf As Nullable(Of Date)) As Integer
+    Public Overridable Function sp_Mam_TO005(tipo As Nullable(Of Integer), olnumi As Nullable(Of Integer), olnumichof As Nullable(Of Integer), olnumiconci As Nullable(Of Integer), olfecha As Nullable(Of Date), oluact As String, pedido As Nullable(Of Integer), zona As Nullable(Of Integer), mrec As Nullable(Of Decimal), cliente As Nullable(Of Integer), fechai As Nullable(Of Date), fechaf As Nullable(Of Date), nconci As Nullable(Of Integer)) As Integer
         Dim tipoParameter As ObjectParameter = If(tipo.HasValue, New ObjectParameter("tipo", tipo), New ObjectParameter("tipo", GetType(Integer)))
 
         Dim olnumiParameter As ObjectParameter = If(olnumi.HasValue, New ObjectParameter("olnumi", olnumi), New ObjectParameter("olnumi", GetType(Integer)))
@@ -982,7 +985,9 @@ Partial Public Class BDDistBHFEntities
 
         Dim fechafParameter As ObjectParameter = If(fechaf.HasValue, New ObjectParameter("fechaf", fechaf), New ObjectParameter("fechaf", GetType(Date)))
 
-        Return DirectCast(Me, IObjectContextAdapter).ObjectContext.ExecuteFunction("sp_Mam_TO005", tipoParameter, olnumiParameter, olnumichofParameter, olnumiconciParameter, olfechaParameter, oluactParameter, pedidoParameter, zonaParameter, mrecParameter, clienteParameter, fechaiParameter, fechafParameter)
+        Dim nconciParameter As ObjectParameter = If(nconci.HasValue, New ObjectParameter("nconci", nconci), New ObjectParameter("nconci", GetType(Integer)))
+
+        Return DirectCast(Me, IObjectContextAdapter).ObjectContext.ExecuteFunction("sp_Mam_TO005", tipoParameter, olnumiParameter, olnumichofParameter, olnumiconciParameter, olfechaParameter, oluactParameter, pedidoParameter, zonaParameter, mrecParameter, clienteParameter, fechaiParameter, fechafParameter, nconciParameter)
     End Function
 
     Public Overridable Function sp_Mam_TV00121(tipo As Nullable(Of Integer), tdnumi As Nullable(Of Integer), tduact As String, credito As Nullable(Of Integer)) As Integer

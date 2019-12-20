@@ -7,4 +7,5 @@ Public Interface IPedido
     Function ListarDespachoXClienteDeChofer(idChofer As Integer) As List(Of RDespachoxCliente)
     Function ListarDespachoXProductoDeChofer(idChofer As Integer) As List(Of RDespachoXProducto)
     Function ListarDespachoXProductoDeChoferSalida(idChofer As Integer) As List(Of RDespachoXProducto)
+    Function ListarDespachXoNotaVentaDeChofer(idChofer As Integer, idDespacho As Integer) As List(Of RDespachoNotaVentaXCliente)
 End Interface

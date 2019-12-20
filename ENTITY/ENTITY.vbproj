@@ -81,6 +81,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="Pedido\Report\RDespachoNotaVentaXCliente.vb" />
     <Compile Include="Pedido\Report\RDespachoXCliente.vb" />
     <Compile Include="Pedido\Report\RDespachoXProducto.vb" />
     <Compile Include="Pedido\View\Base\VPedido.vb" />

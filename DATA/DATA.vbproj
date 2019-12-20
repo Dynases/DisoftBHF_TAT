@@ -347,6 +347,9 @@
     <Compile Include="EntityDataModel\BDDistBHF\vr_go_comprobanteVenta.vb">
       <DependentUpon>BDDistBHFModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="EntityDataModel\BDDistBHF\VR_GO_DespachoNotaVentaXCliente.vb">
+      <DependentUpon>BDDistBHFModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="EntityDataModel\BDDistBHF\VR_GO_DespachoXCliente.vb">
       <DependentUpon>BDDistBHFModel.tt</DependentUpon>
     </Compile>
