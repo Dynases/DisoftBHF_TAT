@@ -35,6 +35,7 @@ Partial Class frmBillingDispatch
         Me.btReporteDespachoLinea = New DevComponents.DotNetBar.ButtonX()
         Me.LabelX2 = New DevComponents.DotNetBar.LabelX()
         Me.cbChoferes = New Janus.Windows.GridEX.EditControls.MultiColumnCombo()
+        Me.ButtonX1 = New DevComponents.DotNetBar.ButtonX()
         Me.PanelBase.SuspendLayout()
         Me.PanelPedido.SuspendLayout()
         CType(Me.dgjPedido, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -91,6 +92,7 @@ Partial Class frmBillingDispatch
         '
         'PanelSuperior
         '
+        Me.PanelSuperior.Controls.Add(Me.ButtonX1)
         Me.PanelSuperior.Controls.Add(Me.btFacturar)
         Me.PanelSuperior.Controls.Add(Me.btReporteDespachoCliente)
         Me.PanelSuperior.Controls.Add(Me.btReporteDespachoLinea)
@@ -115,7 +117,7 @@ Partial Class frmBillingDispatch
         Me.btFacturar.Size = New System.Drawing.Size(75, 60)
         Me.btFacturar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
         Me.btFacturar.TabIndex = 4
-        Me.btFacturar.Text = "Facturar"
+        Me.btFacturar.Text = "Nota de Venta"
         '
         'btReporteDespachoCliente
         '
@@ -170,6 +172,21 @@ Partial Class frmBillingDispatch
         Me.cbChoferes.Size = New System.Drawing.Size(200, 20)
         Me.cbChoferes.TabIndex = 2
         '
+        'ButtonX1
+        '
+        Me.ButtonX1.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.ButtonX1.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.ButtonX1.Dock = System.Windows.Forms.DockStyle.Right
+        Me.ButtonX1.Image = Global.Presentacion.My.Resources.Resources.REPORTE2
+        Me.ButtonX1.ImageFixedSize = New System.Drawing.Size(30, 30)
+        Me.ButtonX1.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top
+        Me.ButtonX1.Location = New System.Drawing.Point(500, 0)
+        Me.ButtonX1.Name = "ButtonX1"
+        Me.ButtonX1.Size = New System.Drawing.Size(75, 60)
+        Me.ButtonX1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.ButtonX1.TabIndex = 7
+        Me.ButtonX1.Text = "Facturar"
+        '
         'frmBillingDispatch
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -201,4 +218,5 @@ Partial Class frmBillingDispatch
     Friend WithEvents dgjPedido As Janus.Windows.GridEX.GridEX
     Friend WithEvents dgjProducto As Janus.Windows.GridEX.GridEX
     Friend WithEvents btReporteDespachoCliente As DevComponents.DotNetBar.ButtonX
+    Friend WithEvents ButtonX1 As DevComponents.DotNetBar.ButtonX
 End Class

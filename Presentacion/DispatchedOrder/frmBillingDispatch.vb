@@ -264,7 +264,7 @@ Public Class frmBillingDispatch
 
             dgjPedido.RootTable.Columns.Add(New GridEXColumn("Check"))
             With dgjPedido.RootTable.Columns("Check")
-                .Caption = "Facturado"
+                .Caption = "N.Venta"
                 .Width = 80
                 .ShowRowSelector = True
                 .UseHeaderSelector = True
