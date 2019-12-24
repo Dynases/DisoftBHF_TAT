@@ -150,7 +150,8 @@ Public Class RPedido
                                       .obpcant = a.obpcant,
                                       .obpbase = a.obpbase,
                                       .obptot = a.obptot,
-                                      .Total = a.Total
+                                      .Total = a.Total,
+                                      .oaobs = a.oaobs
                                       }).ToList()
                 Return listResult
             End Using

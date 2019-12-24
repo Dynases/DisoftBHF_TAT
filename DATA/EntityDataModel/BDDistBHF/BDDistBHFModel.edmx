@@ -554,8 +554,8 @@ advertencia 6002: La tabla o vista 'BDDistBHF_TAT.dbo.TM0013' no tiene definida 
           <Property Name="oaccli" Type="int" />
           <Property Name="oazona" Type="int" />
           <Property Name="oarepa" Type="int" />
-          <Property Name="oaobs" Type="nvarchar" MaxLength="100" />
-          <Property Name="oaobs2" Type="nvarchar" MaxLength="60" />
+          <Property Name="oaobs" Type="nvarchar" MaxLength="300" />
+          <Property Name="oaobs2" Type="nvarchar" MaxLength="100" />
           <Property Name="oaest" Type="int" />
           <Property Name="oaap" Type="int" />
           <Property Name="oapg" Type="int" />
@@ -1147,6 +1147,7 @@ advertencia 6002: La tabla o vista 'BDDistBHF_TAT.dbo.VR_GO_DespachoNotaVentaXCl
           <Property Name="cbdesc" Type="nvarchar" MaxLength="50" />
           <Property Name="canumi" Type="int" Nullable="false" />
           <Property Name="cadesc" Type="nvarchar" MaxLength="100" />
+          <Property Name="oaobs" Type="nvarchar" MaxLength="300" />
           <Property Name="obpcant" Type="decimal" Precision="18" Scale="2" />
           <Property Name="obpbase" Type="numeric" Precision="18" Scale="2" />
           <Property Name="obptot" Type="numeric" Precision="18" Scale="2" />
@@ -2927,6 +2928,7 @@ advertencia 6002: La tabla o vista 'BDDistBHF_TAT.dbo.VR_VistaPedido_PrecioCosto
     [VR_GO_DespachoNotaVentaXCliente].[cbdesc] AS [cbdesc], 
     [VR_GO_DespachoNotaVentaXCliente].[canumi] AS [canumi], 
     [VR_GO_DespachoNotaVentaXCliente].[cadesc] AS [cadesc], 
+    [VR_GO_DespachoNotaVentaXCliente].[oaobs] AS [oaobs], 
     [VR_GO_DespachoNotaVentaXCliente].[obpcant] AS [obpcant], 
     [VR_GO_DespachoNotaVentaXCliente].[obpbase] AS [obpbase], 
     [VR_GO_DespachoNotaVentaXCliente].[obptot] AS [obptot], 
@@ -4485,8 +4487,8 @@ advertencia 6002: La tabla o vista 'BDDistBHF_TAT.dbo.VR_VistaPedido_PrecioCosto
           <Property Name="oaccli" Type="Int32" />
           <Property Name="oazona" Type="Int32" />
           <Property Name="oarepa" Type="Int32" />
-          <Property Name="oaobs" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="oaobs2" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="oaobs" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="oaobs2" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="oaest" Type="Int32" />
           <Property Name="oaap" Type="Int32" />
           <Property Name="oapg" Type="Int32" />
@@ -5992,6 +5994,7 @@ advertencia 6002: La tabla o vista 'BDDistBHF_TAT.dbo.VR_VistaPedido_PrecioCosto
           <Property Name="cbdesc" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="canumi" Type="Int32" Nullable="false" />
           <Property Name="cadesc" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="oaobs" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
           <Property Name="obpcant" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="obpbase" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="obptot" Type="Decimal" Precision="18" Scale="2" />
@@ -8026,6 +8029,7 @@ advertencia 6002: La tabla o vista 'BDDistBHF_TAT.dbo.VR_VistaPedido_PrecioCosto
                 <ScalarProperty Name="obptot" ColumnName="obptot" />
                 <ScalarProperty Name="obpbase" ColumnName="obpbase" />
                 <ScalarProperty Name="obpcant" ColumnName="obpcant" />
+                <ScalarProperty Name="oaobs" ColumnName="oaobs" />
                 <ScalarProperty Name="cadesc" ColumnName="cadesc" />
                 <ScalarProperty Name="canumi" ColumnName="canumi" />
                 <ScalarProperty Name="cbdesc" ColumnName="cbdesc" />

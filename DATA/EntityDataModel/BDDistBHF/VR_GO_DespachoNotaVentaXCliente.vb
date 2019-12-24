@@ -17,6 +17,7 @@ Partial Public Class VR_GO_DespachoNotaVentaXCliente
     Public Property cbdesc As String
     Public Property canumi As Integer
     Public Property cadesc As String
+    Public Property oaobs As String
     Public Property obpcant As Nullable(Of Decimal)
     Public Property obpbase As Nullable(Of Decimal)
     Public Property obptot As Nullable(Of Decimal)
