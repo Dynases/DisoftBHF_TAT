@@ -68,4 +68,24 @@
             _obpcant = value
         End Set
     End Property
+
+    Private _chprecio As Decimal
+    Public Property chprecio() As Decimal
+        Get
+            Return _chprecio
+        End Get
+        Set(ByVal value As Decimal)
+            _chprecio = value
+        End Set
+    End Property
+
+    Private _Total As Decimal
+    Public Property Total() As Decimal
+        Get
+            Return _Total
+        End Get
+        Set(ByVal value As Decimal)
+            _Total = value
+        End Set
+    End Property
 End Class

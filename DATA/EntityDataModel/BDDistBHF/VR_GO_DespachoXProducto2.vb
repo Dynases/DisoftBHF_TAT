@@ -10,7 +10,7 @@
 Imports System
 Imports System.Collections.Generic
 
-Partial Public Class VR_GO_DespachoXProducto
+Partial Public Class VR_GO_DespachoXProducto2
     Public Property oaccbnumi As Integer
     Public Property canumi As Integer
     Public Property cacod As String
@@ -18,7 +18,6 @@ Partial Public Class VR_GO_DespachoXProducto
     Public Property cadesc2 As String
     Public Property categoria As String
     Public Property obpcant As Nullable(Of Decimal)
-    Public Property chprecio As Nullable(Of Decimal)
-    Public Property Total As Nullable(Of Decimal)
+    Public Property oacnconc As Nullable(Of Integer)
 
 End Class

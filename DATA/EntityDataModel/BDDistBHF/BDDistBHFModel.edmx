@@ -554,8 +554,8 @@ advertencia 6002: La tabla o vista 'BDDistBHF_TAT.dbo.TM0013' no tiene definida 
           <Property Name="oaccli" Type="int" />
           <Property Name="oazona" Type="int" />
           <Property Name="oarepa" Type="int" />
-          <Property Name="oaobs" Type="nvarchar" MaxLength="300" />
-          <Property Name="oaobs2" Type="nvarchar" MaxLength="100" />
+          <Property Name="oaobs" Type="nvarchar" MaxLength="100" />
+          <Property Name="oaobs2" Type="nvarchar" MaxLength="60" />
           <Property Name="oaest" Type="int" />
           <Property Name="oaap" Type="int" />
           <Property Name="oapg" Type="int" />
@@ -1147,13 +1147,13 @@ advertencia 6002: La tabla o vista 'BDDistBHF_TAT.dbo.VR_GO_DespachoNotaVentaXCl
           <Property Name="cbdesc" Type="nvarchar" MaxLength="50" />
           <Property Name="canumi" Type="int" Nullable="false" />
           <Property Name="cadesc" Type="nvarchar" MaxLength="100" />
-          <Property Name="oaobs" Type="nvarchar" MaxLength="300" />
           <Property Name="obpcant" Type="decimal" Precision="18" Scale="2" />
           <Property Name="obpbase" Type="numeric" Precision="18" Scale="2" />
           <Property Name="obptot" Type="numeric" Precision="18" Scale="2" />
           <Property Name="oaest" Type="int" />
           <Property Name="oaccbnumi" Type="int" Nullable="false" />
           <Property Name="Total" Type="numeric" Precision="38" Scale="2" />
+          <Property Name="oaobs" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'BDDistBHF_TAT.dbo.VR_GO_DespachoXCliente' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -1173,6 +1173,23 @@ advertencia 6002: La tabla o vista 'BDDistBHF_TAT.dbo.VR_GO_DespachoXCliente' no
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'BDDistBHF_TAT.dbo.VR_GO_DespachoXProducto' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VR_GO_DespachoXProducto">
+          <Key>
+            <PropertyRef Name="oaccbnumi" />
+            <PropertyRef Name="canumi" />
+          </Key>
+          <Property Name="oaccbnumi" Type="int" Nullable="false" />
+          <Property Name="canumi" Type="int" Nullable="false" />
+          <Property Name="cacod" Type="nvarchar" MaxLength="10" />
+          <Property Name="cadesc" Type="nvarchar" MaxLength="100" />
+          <Property Name="cadesc2" Type="nvarchar" MaxLength="100" />
+          <Property Name="categoria" Type="nvarchar" MaxLength="200" />
+          <Property Name="obpcant" Type="decimal" Precision="38" Scale="2" />
+          <Property Name="chprecio" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="Total" Type="numeric" Precision="38" Scale="4" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'BDDistBHF_TAT.dbo.VR_GO_DespachoXProducto2' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="VR_GO_DespachoXProducto2">
           <Key>
             <PropertyRef Name="oaccbnumi" />
             <PropertyRef Name="canumi" />
@@ -2928,13 +2945,13 @@ advertencia 6002: La tabla o vista 'BDDistBHF_TAT.dbo.VR_VistaPedido_PrecioCosto
     [VR_GO_DespachoNotaVentaXCliente].[cbdesc] AS [cbdesc], 
     [VR_GO_DespachoNotaVentaXCliente].[canumi] AS [canumi], 
     [VR_GO_DespachoNotaVentaXCliente].[cadesc] AS [cadesc], 
-    [VR_GO_DespachoNotaVentaXCliente].[oaobs] AS [oaobs], 
     [VR_GO_DespachoNotaVentaXCliente].[obpcant] AS [obpcant], 
     [VR_GO_DespachoNotaVentaXCliente].[obpbase] AS [obpbase], 
     [VR_GO_DespachoNotaVentaXCliente].[obptot] AS [obptot], 
     [VR_GO_DespachoNotaVentaXCliente].[oaest] AS [oaest], 
     [VR_GO_DespachoNotaVentaXCliente].[oaccbnumi] AS [oaccbnumi], 
-    [VR_GO_DespachoNotaVentaXCliente].[Total] AS [Total]
+    [VR_GO_DespachoNotaVentaXCliente].[Total] AS [Total], 
+    [VR_GO_DespachoNotaVentaXCliente].[oaobs] AS [oaobs]
     FROM [dbo].[VR_GO_DespachoNotaVentaXCliente] AS [VR_GO_DespachoNotaVentaXCliente]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="VR_GO_DespachoXCliente" EntityType="Self.VR_GO_DespachoXCliente" store:Type="Views" store:Schema="dbo">
@@ -2956,8 +2973,21 @@ advertencia 6002: La tabla o vista 'BDDistBHF_TAT.dbo.VR_VistaPedido_PrecioCosto
     [VR_GO_DespachoXProducto].[cadesc2] AS [cadesc2], 
     [VR_GO_DespachoXProducto].[categoria] AS [categoria], 
     [VR_GO_DespachoXProducto].[obpcant] AS [obpcant], 
-    [VR_GO_DespachoXProducto].[oacnconc] AS [oacnconc]
+    [VR_GO_DespachoXProducto].[chprecio] AS [chprecio], 
+    [VR_GO_DespachoXProducto].[Total] AS [Total]
     FROM [dbo].[VR_GO_DespachoXProducto] AS [VR_GO_DespachoXProducto]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="VR_GO_DespachoXProducto2" EntityType="Self.VR_GO_DespachoXProducto2" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [VR_GO_DespachoXProducto2].[oaccbnumi] AS [oaccbnumi], 
+    [VR_GO_DespachoXProducto2].[canumi] AS [canumi], 
+    [VR_GO_DespachoXProducto2].[cacod] AS [cacod], 
+    [VR_GO_DespachoXProducto2].[cadesc] AS [cadesc], 
+    [VR_GO_DespachoXProducto2].[cadesc2] AS [cadesc2], 
+    [VR_GO_DespachoXProducto2].[categoria] AS [categoria], 
+    [VR_GO_DespachoXProducto2].[obpcant] AS [obpcant], 
+    [VR_GO_DespachoXProducto2].[oacnconc] AS [oacnconc]
+    FROM [dbo].[VR_GO_DespachoXProducto2] AS [VR_GO_DespachoXProducto2]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="VR_GO_DiferenciaPedidoNota" EntityType="Self.VR_GO_DiferenciaPedidoNota" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -3523,7 +3553,6 @@ advertencia 6002: La tabla o vista 'BDDistBHF_TAT.dbo.VR_VistaPedido_PrecioCosto
           <EntitySet Name="TA001" EntityType="BDDistBHFModel.TA001" />
           <EntitySet Name="TB001" EntityType="BDDistBHFModel.TB001" />
           <EntitySet Name="TC001" EntityType="BDDistBHFModel.TC001" />
-          <EntitySet Name="TC002" EntityType="BDDistBHFModel.TC002" />
           <EntitySet Name="TC003" EntityType="BDDistBHFModel.TC003" />
           <EntitySet Name="TC004" EntityType="BDDistBHFModel.TC004" />
           <EntitySet Name="TC0042" EntityType="BDDistBHFModel.TC0042" />
@@ -3593,8 +3622,6 @@ advertencia 6002: La tabla o vista 'BDDistBHF_TAT.dbo.VR_VistaPedido_PrecioCosto
           <EntitySet Name="VR_FacturasChacaltaya" EntityType="BDDistBHFModel.VR_FacturasChacaltaya" />
           <EntitySet Name="vr_go_comprobanteSalidaItems" EntityType="BDDistBHFModel.vr_go_comprobanteSalidaItems" />
           <EntitySet Name="vr_go_comprobanteVenta" EntityType="BDDistBHFModel.vr_go_comprobanteVenta" />
-          <EntitySet Name="VR_GO_DespachoXCliente" EntityType="BDDistBHFModel.VR_GO_DespachoXCliente" />
-          <EntitySet Name="VR_GO_DespachoXProducto" EntityType="BDDistBHFModel.VR_GO_DespachoXProducto" />
           <EntitySet Name="VR_GO_DiferenciaPedidoNota" EntityType="BDDistBHFModel.VR_GO_DiferenciaPedidoNota" />
           <EntitySet Name="VR_GO_EquipoPrestadoVsUltimaVenta" EntityType="BDDistBHFModel.VR_GO_EquipoPrestadoVsUltimaVenta" />
           <EntitySet Name="VR_GO_EquiposPrestadoCliente" EntityType="BDDistBHFModel.VR_GO_EquiposPrestadoCliente" />
@@ -4108,7 +4135,11 @@ advertencia 6002: La tabla o vista 'BDDistBHF_TAT.dbo.VR_VistaPedido_PrecioCosto
           </FunctionImport>
           <FunctionImport Name="vis_promedioConsumo" ReturnType="Collection(BDDistBHFModel.vis_promedioConsumo_Result)" />
           <FunctionImport Name="vis_transacciones" ReturnType="Collection(BDDistBHFModel.vis_transacciones_Result)" />
+          <EntitySet Name="VR_GO_DespachoXProducto2" EntityType="BDDistBHFModel.VR_GO_DespachoXProducto2" />
+          <EntitySet Name="TC002" EntityType="BDDistBHFModel.TC002" />
           <EntitySet Name="VR_GO_DespachoNotaVentaXCliente" EntityType="BDDistBHFModel.VR_GO_DespachoNotaVentaXCliente" />
+          <EntitySet Name="VR_GO_DespachoXProducto" EntityType="BDDistBHFModel.VR_GO_DespachoXProducto" />
+          <EntitySet Name="VR_GO_DespachoXCliente" EntityType="BDDistBHFModel.VR_GO_DespachoXCliente" />
         </EntityContainer>
         <EntityType Name="CM001">
           <Key>
@@ -4188,30 +4219,6 @@ advertencia 6002: La tabla o vista 'BDDistBHF_TAT.dbo.VR_VistaPedido_PrecioCosto
           <Property Name="cauventa" Type="Int32" />
           <Property Name="caumax" Type="Int32" />
           <Property Name="caconv" Type="Decimal" Precision="18" Scale="2" />
-        </EntityType>
-        <EntityType Name="TC002">
-          <Key>
-            <PropertyRef Name="cbnumi" />
-          </Key>
-          <Property Name="cbnumi" Type="Int32" Nullable="false" />
-          <Property Name="cbdesc" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="cbdirec" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="cbtelef" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="cbcat" Type="Int32" />
-          <Property Name="cbsal" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="cbci" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="cbobs" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
-          <Property Name="cbfnac" Type="DateTime" Precision="0" />
-          <Property Name="cbfing" Type="DateTime" Precision="0" />
-          <Property Name="cbfret" Type="DateTime" Precision="0" />
-          <Property Name="cbfot" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="cbest" Type="Boolean" />
-          <Property Name="cbeciv" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="cbplan" Type="Int32" />
-          <Property Name="cbreloj" Type="Int32" />
-          <Property Name="cbfact" Type="DateTime" Precision="0" />
-          <Property Name="cbhact" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
-          <Property Name="cbuact" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="TC003">
           <Key>
@@ -4487,8 +4494,8 @@ advertencia 6002: La tabla o vista 'BDDistBHF_TAT.dbo.VR_VistaPedido_PrecioCosto
           <Property Name="oaccli" Type="Int32" />
           <Property Name="oazona" Type="Int32" />
           <Property Name="oarepa" Type="Int32" />
-          <Property Name="oaobs" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
-          <Property Name="oaobs2" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="oaobs" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="oaobs2" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
           <Property Name="oaest" Type="Int32" />
           <Property Name="oaap" Type="Int32" />
           <Property Name="oapg" Type="Int32" />
@@ -5153,33 +5160,6 @@ advertencia 6002: La tabla o vista 'BDDistBHF_TAT.dbo.VR_VistaPedido_PrecioCosto
           <Property Name="totalContado" Type="Decimal" Precision="19" Scale="2" />
           <Property Name="factura" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="ojobs" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="VR_GO_DespachoXCliente">
-          <Key>
-            <PropertyRef Name="oaccbnumi" />
-            <PropertyRef Name="ccnumi" />
-            <PropertyRef Name="oacnrofact" />
-          </Key>
-          <Property Name="oaccbnumi" Type="Int32" Nullable="false" />
-          <Property Name="ccnumi" Type="Int32" Nullable="false" />
-          <Property Name="cccod" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
-          <Property Name="ccdesc" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="oacnrofact" Type="Int64" Nullable="false" />
-          <Property Name="obptot" Type="Decimal" Precision="38" Scale="2" />
-        </EntityType>
-        <EntityType Name="VR_GO_DespachoXProducto">
-          <Key>
-            <PropertyRef Name="oaccbnumi" />
-            <PropertyRef Name="canumi" />
-          </Key>
-          <Property Name="oaccbnumi" Type="Int32" Nullable="false" />
-          <Property Name="canumi" Type="Int32" Nullable="false" />
-          <Property Name="cacod" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="cadesc" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="cadesc2" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="categoria" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="obpcant" Type="Decimal" Precision="38" Scale="2" />
-          <Property Name="oacnconc" Type="Int32" />
         </EntityType>
         <EntityType Name="VR_GO_DiferenciaPedidoNota">
           <Key>
@@ -5982,6 +5962,44 @@ advertencia 6002: La tabla o vista 'BDDistBHF_TAT.dbo.VR_VistaPedido_PrecioCosto
           <Property Type="String" Name="uact" Nullable="true" MaxLength="50" />
           <Property Type="Int32" Name="tipo" Nullable="false" />
         </ComplexType>
+        <EntityType Name="VR_GO_DespachoXProducto2">
+          <Key>
+            <PropertyRef Name="oaccbnumi" />
+            <PropertyRef Name="canumi" />
+          </Key>
+          <Property Name="oaccbnumi" Type="Int32" Nullable="false" />
+          <Property Name="canumi" Type="Int32" Nullable="false" />
+          <Property Name="cacod" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="cadesc" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="cadesc2" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="categoria" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="obpcant" Type="Decimal" Precision="38" Scale="2" />
+          <Property Name="oacnconc" Type="Int32" />
+        </EntityType>
+        <EntityType Name="TC002">
+          <Key>
+            <PropertyRef Name="cbnumi" />
+          </Key>
+          <Property Name="cbnumi" Type="Int32" Nullable="false" />
+          <Property Name="cbdesc" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="cbdirec" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="cbtelef" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="cbcat" Type="Int32" />
+          <Property Name="cbsal" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="cbci" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="cbobs" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="cbfnac" Type="DateTime" Precision="0" />
+          <Property Name="cbfing" Type="DateTime" Precision="0" />
+          <Property Name="cbfret" Type="DateTime" Precision="0" />
+          <Property Name="cbfot" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="cbest" Type="Boolean" />
+          <Property Name="cbeciv" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="cbplan" Type="Int32" />
+          <Property Name="cbreloj" Type="Int32" />
+          <Property Name="cbfact" Type="DateTime" Precision="0" />
+          <Property Name="cbhact" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="cbuact" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+        </EntityType>
         <EntityType Name="VR_GO_DespachoNotaVentaXCliente">
           <Key>
             <PropertyRef Name="oanumi" />
@@ -5994,13 +6012,41 @@ advertencia 6002: La tabla o vista 'BDDistBHF_TAT.dbo.VR_VistaPedido_PrecioCosto
           <Property Name="cbdesc" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="canumi" Type="Int32" Nullable="false" />
           <Property Name="cadesc" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="oaobs" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
           <Property Name="obpcant" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="obpbase" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="obptot" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="oaest" Type="Int32" />
           <Property Name="oaccbnumi" Type="Int32" Nullable="false" />
           <Property Name="Total" Type="Decimal" Precision="38" Scale="2" />
+          <Property Name="oaobs" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="VR_GO_DespachoXProducto">
+          <Key>
+            <PropertyRef Name="oaccbnumi" />
+            <PropertyRef Name="canumi" />
+          </Key>
+          <Property Name="oaccbnumi" Type="Int32" Nullable="false" />
+          <Property Name="canumi" Type="Int32" Nullable="false" />
+          <Property Name="cacod" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="cadesc" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="cadesc2" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="categoria" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="obpcant" Type="Decimal" Precision="38" Scale="2" />
+          <Property Name="chprecio" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Total" Type="Decimal" Precision="38" Scale="4" />
+        </EntityType>
+        <EntityType Name="VR_GO_DespachoXCliente">
+          <Key>
+            <PropertyRef Name="oaccbnumi" />
+            <PropertyRef Name="ccnumi" />
+            <PropertyRef Name="oacnrofact" />
+          </Key>
+          <Property Name="oaccbnumi" Type="Int32" Nullable="false" />
+          <Property Name="ccnumi" Type="Int32" Nullable="false" />
+          <Property Name="cccod" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="ccdesc" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="oacnrofact" Type="Int64" Nullable="false" />
+          <Property Name="obptot" Type="Decimal" Precision="38" Scale="2" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -6089,31 +6135,6 @@ advertencia 6002: La tabla o vista 'BDDistBHF_TAT.dbo.VR_VistaPedido_PrecioCosto
                 <ScalarProperty Name="cadesc" ColumnName="cadesc" />
                 <ScalarProperty Name="cacod" ColumnName="cacod" />
                 <ScalarProperty Name="canumi" ColumnName="canumi" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TC002">
-            <EntityTypeMapping TypeName="BDDistBHFModel.TC002">
-              <MappingFragment StoreEntitySet="TC002">
-                <ScalarProperty Name="cbuact" ColumnName="cbuact" />
-                <ScalarProperty Name="cbhact" ColumnName="cbhact" />
-                <ScalarProperty Name="cbfact" ColumnName="cbfact" />
-                <ScalarProperty Name="cbreloj" ColumnName="cbreloj" />
-                <ScalarProperty Name="cbplan" ColumnName="cbplan" />
-                <ScalarProperty Name="cbeciv" ColumnName="cbeciv" />
-                <ScalarProperty Name="cbest" ColumnName="cbest" />
-                <ScalarProperty Name="cbfot" ColumnName="cbfot" />
-                <ScalarProperty Name="cbfret" ColumnName="cbfret" />
-                <ScalarProperty Name="cbfing" ColumnName="cbfing" />
-                <ScalarProperty Name="cbfnac" ColumnName="cbfnac" />
-                <ScalarProperty Name="cbobs" ColumnName="cbobs" />
-                <ScalarProperty Name="cbci" ColumnName="cbci" />
-                <ScalarProperty Name="cbsal" ColumnName="cbsal" />
-                <ScalarProperty Name="cbcat" ColumnName="cbcat" />
-                <ScalarProperty Name="cbtelef" ColumnName="cbtelef" />
-                <ScalarProperty Name="cbdirec" ColumnName="cbdirec" />
-                <ScalarProperty Name="cbdesc" ColumnName="cbdesc" />
-                <ScalarProperty Name="cbnumi" ColumnName="cbnumi" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -7120,32 +7141,6 @@ advertencia 6002: La tabla o vista 'BDDistBHF_TAT.dbo.VR_VistaPedido_PrecioCosto
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="VR_GO_DespachoXCliente">
-            <EntityTypeMapping TypeName="BDDistBHFModel.VR_GO_DespachoXCliente">
-              <MappingFragment StoreEntitySet="VR_GO_DespachoXCliente">
-                <ScalarProperty Name="obptot" ColumnName="obptot" />
-                <ScalarProperty Name="oacnrofact" ColumnName="oacnrofact" />
-                <ScalarProperty Name="ccdesc" ColumnName="ccdesc" />
-                <ScalarProperty Name="cccod" ColumnName="cccod" />
-                <ScalarProperty Name="ccnumi" ColumnName="ccnumi" />
-                <ScalarProperty Name="oaccbnumi" ColumnName="oaccbnumi" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="VR_GO_DespachoXProducto">
-            <EntityTypeMapping TypeName="BDDistBHFModel.VR_GO_DespachoXProducto">
-              <MappingFragment StoreEntitySet="VR_GO_DespachoXProducto">
-                <ScalarProperty Name="oacnconc" ColumnName="oacnconc" />
-                <ScalarProperty Name="obpcant" ColumnName="obpcant" />
-                <ScalarProperty Name="categoria" ColumnName="categoria" />
-                <ScalarProperty Name="cadesc2" ColumnName="cadesc2" />
-                <ScalarProperty Name="cadesc" ColumnName="cadesc" />
-                <ScalarProperty Name="cacod" ColumnName="cacod" />
-                <ScalarProperty Name="canumi" ColumnName="canumi" />
-                <ScalarProperty Name="oaccbnumi" ColumnName="oaccbnumi" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="VR_GO_DiferenciaPedidoNota">
             <EntityTypeMapping TypeName="BDDistBHFModel.VR_GO_DiferenciaPedidoNota">
               <MappingFragment StoreEntitySet="VR_GO_DiferenciaPedidoNota">
@@ -8020,22 +8015,88 @@ advertencia 6002: La tabla o vista 'BDDistBHF_TAT.dbo.VR_VistaPedido_PrecioCosto
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="VR_GO_DespachoXProducto2">
+            <EntityTypeMapping TypeName="BDDistBHFModel.VR_GO_DespachoXProducto2">
+              <MappingFragment StoreEntitySet="VR_GO_DespachoXProducto2">
+                <ScalarProperty Name="oacnconc" ColumnName="oacnconc" />
+                <ScalarProperty Name="obpcant" ColumnName="obpcant" />
+                <ScalarProperty Name="categoria" ColumnName="categoria" />
+                <ScalarProperty Name="cadesc2" ColumnName="cadesc2" />
+                <ScalarProperty Name="cadesc" ColumnName="cadesc" />
+                <ScalarProperty Name="cacod" ColumnName="cacod" />
+                <ScalarProperty Name="canumi" ColumnName="canumi" />
+                <ScalarProperty Name="oaccbnumi" ColumnName="oaccbnumi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TC002">
+            <EntityTypeMapping TypeName="BDDistBHFModel.TC002">
+              <MappingFragment StoreEntitySet="TC002">
+                <ScalarProperty Name="cbuact" ColumnName="cbuact" />
+                <ScalarProperty Name="cbhact" ColumnName="cbhact" />
+                <ScalarProperty Name="cbfact" ColumnName="cbfact" />
+                <ScalarProperty Name="cbreloj" ColumnName="cbreloj" />
+                <ScalarProperty Name="cbplan" ColumnName="cbplan" />
+                <ScalarProperty Name="cbeciv" ColumnName="cbeciv" />
+                <ScalarProperty Name="cbest" ColumnName="cbest" />
+                <ScalarProperty Name="cbfot" ColumnName="cbfot" />
+                <ScalarProperty Name="cbfret" ColumnName="cbfret" />
+                <ScalarProperty Name="cbfing" ColumnName="cbfing" />
+                <ScalarProperty Name="cbfnac" ColumnName="cbfnac" />
+                <ScalarProperty Name="cbobs" ColumnName="cbobs" />
+                <ScalarProperty Name="cbci" ColumnName="cbci" />
+                <ScalarProperty Name="cbsal" ColumnName="cbsal" />
+                <ScalarProperty Name="cbcat" ColumnName="cbcat" />
+                <ScalarProperty Name="cbtelef" ColumnName="cbtelef" />
+                <ScalarProperty Name="cbdirec" ColumnName="cbdirec" />
+                <ScalarProperty Name="cbdesc" ColumnName="cbdesc" />
+                <ScalarProperty Name="cbnumi" ColumnName="cbnumi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="VR_GO_DespachoNotaVentaXCliente">
             <EntityTypeMapping TypeName="BDDistBHFModel.VR_GO_DespachoNotaVentaXCliente">
               <MappingFragment StoreEntitySet="VR_GO_DespachoNotaVentaXCliente">
+                <ScalarProperty Name="oaobs" ColumnName="oaobs" />
                 <ScalarProperty Name="Total" ColumnName="Total" />
                 <ScalarProperty Name="oaccbnumi" ColumnName="oaccbnumi" />
                 <ScalarProperty Name="oaest" ColumnName="oaest" />
                 <ScalarProperty Name="obptot" ColumnName="obptot" />
                 <ScalarProperty Name="obpbase" ColumnName="obpbase" />
                 <ScalarProperty Name="obpcant" ColumnName="obpcant" />
-                <ScalarProperty Name="oaobs" ColumnName="oaobs" />
                 <ScalarProperty Name="cadesc" ColumnName="cadesc" />
                 <ScalarProperty Name="canumi" ColumnName="canumi" />
                 <ScalarProperty Name="cbdesc" ColumnName="cbdesc" />
                 <ScalarProperty Name="ccdesc" ColumnName="ccdesc" />
                 <ScalarProperty Name="oafdoc" ColumnName="oafdoc" />
                 <ScalarProperty Name="oanumi" ColumnName="oanumi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VR_GO_DespachoXProducto">
+            <EntityTypeMapping TypeName="BDDistBHFModel.VR_GO_DespachoXProducto">
+              <MappingFragment StoreEntitySet="VR_GO_DespachoXProducto">
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="chprecio" ColumnName="chprecio" />
+                <ScalarProperty Name="obpcant" ColumnName="obpcant" />
+                <ScalarProperty Name="categoria" ColumnName="categoria" />
+                <ScalarProperty Name="cadesc2" ColumnName="cadesc2" />
+                <ScalarProperty Name="cadesc" ColumnName="cadesc" />
+                <ScalarProperty Name="cacod" ColumnName="cacod" />
+                <ScalarProperty Name="canumi" ColumnName="canumi" />
+                <ScalarProperty Name="oaccbnumi" ColumnName="oaccbnumi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VR_GO_DespachoXCliente">
+            <EntityTypeMapping TypeName="BDDistBHFModel.VR_GO_DespachoXCliente">
+              <MappingFragment StoreEntitySet="VR_GO_DespachoXCliente">
+                <ScalarProperty Name="obptot" ColumnName="obptot" />
+                <ScalarProperty Name="oacnrofact" ColumnName="oacnrofact" />
+                <ScalarProperty Name="ccdesc" ColumnName="ccdesc" />
+                <ScalarProperty Name="cccod" ColumnName="cccod" />
+                <ScalarProperty Name="ccnumi" ColumnName="ccnumi" />
+                <ScalarProperty Name="oaccbnumi" ColumnName="oaccbnumi" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

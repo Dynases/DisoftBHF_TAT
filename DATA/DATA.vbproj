@@ -356,6 +356,9 @@
     <Compile Include="EntityDataModel\BDDistBHF\VR_GO_DespachoXProducto.vb">
       <DependentUpon>BDDistBHFModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="EntityDataModel\BDDistBHF\VR_GO_DespachoXProducto2.vb">
+      <DependentUpon>BDDistBHFModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="EntityDataModel\BDDistBHF\VR_GO_DiferenciaPedidoNota.vb">
       <DependentUpon>BDDistBHFModel.tt</DependentUpon>
     </Compile>

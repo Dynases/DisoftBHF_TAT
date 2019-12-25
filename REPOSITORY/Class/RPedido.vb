@@ -106,7 +106,9 @@ Public Class RPedido
                                       .cadesc = a.cadesc,
                                       .cadesc2 = a.cadesc2,
                                       .categoria = a.categoria,
-                                      .obpcant = a.obpcant
+                                      .obpcant = a.obpcant,
+                                      .chprecio = a.chprecio,
+                                      .Total = a.Total
                                       }).ToList()
                 Return listResult
             End Using
@@ -117,7 +119,7 @@ Public Class RPedido
     Public Function ListarDespachoXProductoDeChoferSalida(idChofer As Integer) As List(Of RDespachoXProducto) Implements IPedido.ListarDespachoXProductoDeChoferSalida
         Try
             Using db = GetSchema()
-                Dim listResult = (From a In db.VR_GO_DespachoXProducto
+                Dim listResult = (From a In db.VR_GO_DespachoXProducto2
                                   Where a.oaccbnumi = idChofer And a.oacnconc = 0
                                   Select New RDespachoXProducto With {
                                       .oaccbnumi = a.oaccbnumi,
