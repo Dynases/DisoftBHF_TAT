@@ -38,7 +38,7 @@ Public Class RPedido
                                   Join b In db.TC004 On a.oaccli Equals b.ccnumi
                                   Join c In db.TC002 On a1.oaanumiprev Equals c.cbnumi
                                   Join d In db.TO001C On a.oanumi Equals d.oacoanumi
-                                  Where a.oaest = ENEstadoPedido.DICTADO And d.oaccbnumi = idChofer
+                                  Where a.oaest = ENEstadoPedido.DICTADO And a.oaap = 1 And d.oaccbnumi = idChofer
                                   Select New VPedido_BillingDispatch With {
                                       .Id = a.oanumi,
                                       .Fecha = a.oafdoc,
