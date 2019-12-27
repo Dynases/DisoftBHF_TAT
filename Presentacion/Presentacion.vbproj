@@ -221,7 +221,7 @@
       <HintPath>..\packages\Google.Apis.1.32.0\lib\net45\Google.Apis.PlatformServices.dll</HintPath>
     </Reference>
     <Reference Include="itextsharp">
-      <HintPath>C:\Librerias\itextsharp.dll</HintPath>
+      <HintPath>C:\librerias\PDF\itextsharp.dll</HintPath>
     </Reference>
     <Reference Include="Janus.Data.v3">
       <HintPath>C:\Librerias\Janus\Janus.Data.v3.dll</HintPath>
