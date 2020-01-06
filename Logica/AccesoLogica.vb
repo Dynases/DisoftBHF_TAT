@@ -7568,6 +7568,66 @@ Public Class AccesoLogica
 
         Return _resultado
     End Function
+
+    Public Shared Function L_prCajaGrabarCredito(oanumi As Integer, credito As Double) As Boolean
+        Dim _resultado As Boolean
+        '@olnumi,@olnumichof ,@olnumiconci ,@olfecha ,@newFecha ,@newHora ,@oluact
+        Dim _Tabla As DataTable
+        Dim _listParam As New List(Of Datos.DParametro)
+
+        _listParam.Add(New Datos.DParametro("@tipo", 21))
+        _listParam.Add(New Datos.DParametro("@oanumi", oanumi))
+        _listParam.Add(New Datos.DParametro("@credito", credito))
+        _listParam.Add(New Datos.DParametro("@oluact", L_Usuario))
+        _Tabla = D_ProcedimientoConParam("sp_Mam_TO005", _listParam)
+
+        If _Tabla.Rows.Count > 0 Then
+
+            _resultado = True
+        Else
+            _resultado = False
+        End If
+
+        Return _resultado
+    End Function
+
+    Public Shared Function L_prGrabarTO001C(oanumi As Integer, chofer As Double) As Boolean
+        Dim _resultado As Boolean
+        '@olnumi,@olnumichof ,@olnumiconci ,@olfecha ,@newFecha ,@newHora ,@oluact
+        Dim _Tabla As DataTable
+        Dim _listParam As New List(Of Datos.DParametro)
+
+        _listParam.Add(New Datos.DParametro("@tipo", 23))
+        _listParam.Add(New Datos.DParametro("@oanumi", oanumi))
+        _listParam.Add(New Datos.DParametro("@chofer", chofer))
+        _listParam.Add(New Datos.DParametro("@oluact", L_Usuario))
+        _Tabla = D_ProcedimientoConParam("sp_Mam_TO005", _listParam)
+
+        If _Tabla.Rows.Count > 0 Then
+
+            _resultado = True
+        Else
+            _resultado = False
+        End If
+
+        Return _resultado
+    End Function
+
+    Public Shared Function L_prPedidoNotaVenta(oanumi As Integer) As DataTable
+        Dim _resultado As Boolean
+        '@olnumi,@olnumichof ,@olnumiconci ,@olfecha ,@newFecha ,@newHora ,@oluact
+        Dim _Tabla As DataTable
+        Dim _listParam As New List(Of Datos.DParametro)
+
+        _listParam.Add(New Datos.DParametro("@tipo", 22))
+        _listParam.Add(New Datos.DParametro("@oanumi", oanumi))
+        _listParam.Add(New Datos.DParametro("@oluact", L_Usuario))
+        _Tabla = D_ProcedimientoConParam("sp_Mam_TO005", _listParam)
+
+
+
+        Return _Tabla
+    End Function
     Public Shared Function L_prReporteCreditoGeneral(fechaI As String, fechaF As String) As DataTable
         Dim _Tabla As DataTable
 
@@ -7655,6 +7715,15 @@ Public Class AccesoLogica
         _listParam.Add(New Datos.DParametro("@tipo", 7))
         _listParam.Add(New Datos.DParametro("@oluact", L_Usuario))
         _listParam.Add(New Datos.DParametro("@pedido", numiPedido))
+        _Tabla = D_ProcedimientoConParam("sp_Mam_TO005", _listParam)
+        Return _Tabla
+    End Function
+
+    Public Shared Function L_prListaPedidos() As DataTable
+        Dim _Tabla As DataTable
+        Dim _listParam As New List(Of Datos.DParametro)
+        _listParam.Add(New Datos.DParametro("@tipo", 20))
+        _listParam.Add(New Datos.DParametro("@oluact", L_Usuario))
         _Tabla = D_ProcedimientoConParam("sp_Mam_TO005", _listParam)
         Return _Tabla
     End Function

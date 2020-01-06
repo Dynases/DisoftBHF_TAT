@@ -3,7 +3,10 @@ Imports Janus.Windows.GridEX
 Imports DevComponents.DotNetBar
 Imports Entidades
 Imports DevComponents.DotNetBar.Controls
+Imports ENTITY
 
+Imports LOGIC
+Imports UTILITIES
 Public Class F02_Pedido
 
 #Region "Variables"
@@ -159,9 +162,11 @@ Public Class F02_Pedido
 
         JGr_Buscador.BoundMode = BoundMode.Bound
         If _nuevoBasePeriodico = True Then
-            JGr_Buscador.DataSource = L_PedidoCabecera_General_Pedido(-1, " AND oaest=10" + where)
+            ''JGr_Buscador.DataSource = L_PedidoCabecera_General_Pedido(-1, " AND oaest=10" + where)
+            JGr_Buscador.DataSource = L_prListaPedidos()
         Else
-            JGr_Buscador.DataSource = L_PedidoCabecera_GeneralTOPN(-1, " AND oaest<>10" + where, 100)
+            '' JGr_Buscador.DataSource = L_PedidoCabecera_GeneralTOPN(-1, " AND oaest<>10" + where, 100)
+            JGr_Buscador.DataSource = L_prListaPedidos()
         End If
         JGr_Buscador.RetrieveStructure()
 
@@ -226,7 +231,9 @@ Public Class F02_Pedido
         With JGr_Buscador.RootTable.Columns("cccat")
             .Visible = False
         End With
-
+        With JGr_Buscador.RootTable.Columns("credito")
+            .Visible = False
+        End With
         With JGr_Buscador.RootTable.Columns("oazona")
             .Caption = "cod. zona".ToUpper
             .Width = 70
@@ -285,7 +292,9 @@ Public Class F02_Pedido
         With JGr_Buscador.RootTable.Columns("oaanumiprev")
             .Visible = False
         End With
-
+        With JGr_Buscador.RootTable.Columns("oaanumiprev")
+            .Visible = False
+        End With
         JGr_Buscador.ContextMenuStrip = ConMenu_Buscador
 
         'Habilitar Filtradores
@@ -973,7 +982,8 @@ Public Class F02_Pedido
         'Tb_Observaciones.Enabled = True
         Tb_Observaciones.ReadOnly = False
         Tb_CantProd.ReadOnly = False
-
+        swTipoVenta.IsReadOnly = False
+        tbMontoCredito.ReadOnly = False
         MBtNuevo.Enabled = False
         MBtModificar.Enabled = False
         MBtEliminar.Enabled = False
@@ -1005,8 +1015,11 @@ Public Class F02_Pedido
 
     End Sub
     Private Sub _PInhabilitar()
+        btnVentaDirecta.Visible = False
         Tb_CantProd.ReadOnly = True
         Tb_Id.ReadOnly = True
+        swTipoVenta.IsReadOnly = True
+        tbMontoCredito.ReadOnly = True
         Tb_Fecha.Enabled = False
         Tb_Hora.ReadOnly = True
         Tb_Zona.ReadOnly = False
@@ -1077,6 +1090,8 @@ Public Class F02_Pedido
         Tb_CliCodZona.Text = ""
         Tb_CliDireccion.Text = ""
         Tb_CliNombre.Text = ""
+        swTipoVenta.Value = True
+        tbMontoCredito.Text = 0
         Tb_CliTelef.Text = ""
         Tb_Estado.Value = True
         Tb_CantProd.Text = ""
@@ -1144,6 +1159,8 @@ Public Class F02_Pedido
             Tb_CliCodZona.Text = .GetValue("oazona")
             Tb_CliCateg.Text = .GetValue("cccat")
             Tb_Zona.Text = .GetValue("cedesc")
+            swTipoVenta.Value = .GetValue("credito")
+            tbMontoCredito.Text = .GetValue("montocredito")
             Tb_Observaciones.Text = .GetValue("oaobs")
             If .GetValue("oaest") = 0 Then
                 Tb_Estado.Value = False
@@ -1266,6 +1283,27 @@ Public Class F02_Pedido
             End If
         Next
 
+        Dim dt As DataTable = CType(JGr_DetallePedido.DataSource, DataTable)
+        Dim sumTotal As Double = 0
+        For i = 0 To dt.Rows.Count - 1
+            sumTotal = sumTotal + dt.Rows(i).Item(5)
+
+        Next
+        If (swTipoVenta.Value = False) Then
+            If (tbMontoCredito.Text.Length > 0) Then
+                Dim MontoCredito As Double = Double.Parse(tbMontoCredito.Text)
+
+                If (MontoCredito > sumTotal) Then
+                    ToastNotification.Show(Me, "El monto del Credito es Mayor al del pedido".ToUpper, My.Resources.WARNING, 3000, eToastGlowColor.Green, eToastPosition.BottomCenter)
+                    _Error = True
+                End If
+            Else
+                ToastNotification.Show(Me, "Debe Ingresar un Monto de Credito".ToUpper, My.Resources.WARNING, 3000, eToastGlowColor.Green, eToastPosition.BottomCenter)
+                _Error = True
+            End If
+
+        End If
+
         If _nuevoBasePeriodico = True Then
             If Btn_Check1.Tag = 1 Then 'frecuencia por dias a la semana
                 Dim diasSem As String = ""
@@ -1349,6 +1387,10 @@ Public Class F02_Pedido
 
             L_PedidoCabecera_Grabar(Tb_Id.Text, Date.Now.Date.ToString("yyyy/MM/dd"), Tb_Hora.Text, Tb_CliCod.Text, Tb_CliCodZona.Text, cbDistribuidor.Value.ToString, Tb_Observaciones.Text, IIf(_nuevoBasePeriodico = True, "10", "1"), "1", "0")
             L_PedidoCabecera_GrabarExtencion(Tb_Id.Text, cbPreVendedor.Value.ToString, "2", "0")
+            If (swTipoVenta.Value = False) Then  ''''Grabar Credito
+                L_prCajaGrabarCredito(Tb_Id.Text, Double.Parse(tbMontoCredito.Text))
+            End If
+
 
             'Cambiar de zona al cliente a la zona del chofer
             L_GrabarModificarCliente("cczona=" + Tb_CliCodZona.Text, "ccnumi=" + Str(Tb_CliCod.Text))
@@ -1479,6 +1521,9 @@ Public Class F02_Pedido
                 subTotal = JGr_DetallePedido.CurrentRow.Cells("Monto").Value
                 L_PedidoDetalle_Grabar(Tb_Id.Text, codProd, cant, precio, subTotal)
             Next
+            If (swTipoVenta.Value = False) Then  ''''Grabar Credito
+                L_prCajaGrabarCredito(Tb_Id.Text, Double.Parse(tbMontoCredito.Text))
+            End If
 
             'Grabar detalle de frecuencia del pedido
             If _nuevoBasePeriodico = True Then
@@ -1531,6 +1576,7 @@ Public Class F02_Pedido
 
         JGr_Clientes.MoveTo(JGr_Clientes.FilterRow)
         JGr_Clientes.Col = 1
+        btnVentaDirecta.Visible = True
     End Sub
 
     Private Sub _PModificarRegistro()
@@ -2127,10 +2173,12 @@ Public Class F02_Pedido
     Private Sub Tb_CantProd_KeyDown(sender As Object, e As KeyEventArgs) Handles Tb_CantProd.KeyDown
         If e.KeyData = Keys.Enter Then
             Dim precio As Double
-            JGr_DetallePedido.Row = JGr_DetallePedido.RowCount - 1
-            JGr_DetallePedido.CurrentRow.Cells("Cantidad").Value = Tb_CantProd.Text
+            Dim pos As Integer = JGr_DetallePedido.RowCount - 1
+            JGr_DetallePedido.Row = pos
             precio = JGr_DetallePedido.CurrentRow.Cells("Precio").Value
-            JGr_DetallePedido.CurrentRow.Cells("Monto").Value = CDbl(Tb_CantProd.Text) * precio
+            CType(JGr_DetallePedido.DataSource, DataTable).Rows(pos).Item("obpcant") = Tb_CantProd.Text
+            CType(JGr_DetallePedido.DataSource, DataTable).Rows(pos).Item("obptot") = CDbl(Tb_CantProd.Text) * precio
+            '' JGr_DetallePedido.CurrentRow.EndEdit()
 
             Tb_Observaciones.Focus()
             'Tb_CantProd.Text = ""
@@ -2283,5 +2331,213 @@ Public Class F02_Pedido
         If e.KeyData = Keys.Enter Then
             MSuperTabControlPrincipal.SelectedTabIndex = 0
         End If
+    End Sub
+
+    Private Sub TextBoxX1_KeyPress(sender As Object, e As KeyPressEventArgs) Handles tbMontoCredito.KeyPress
+        g_prValidarTextBox(3, e, sender)
+    End Sub
+
+    Private Sub swTipoVenta_ValueChanged(sender As Object, e As EventArgs) Handles swTipoVenta.ValueChanged
+        If (swTipoVenta.Value = True) Then
+            tbMontoCredito.Visible = False
+        Else
+            tbMontoCredito.Visible = True
+            If (Tb_Id.Text.Length <= 0) Then
+                Dim dt As DataTable = CType(JGr_DetallePedido.DataSource, DataTable)
+                Dim sumTotal As Double = 0
+                For i = 0 To dt.Rows.Count - 1
+                    sumTotal = sumTotal + dt.Rows(i).Item(5)
+
+                Next
+                tbMontoCredito.Text = Str(sumTotal)
+            End If
+        End If
+    End Sub
+    Private Sub _PGrabarRegistroDirecto()
+        Dim _Error As Boolean = False
+        If _PValidar() Then
+            Exit Sub
+        End If
+
+        If MBtGrabar.Enabled = False Then
+            Exit Sub
+        End If
+
+        If _Nuevo Then
+            'INICIAR OBJETOS PARA MANDAR NOTIFICACION
+            Dim objListDetalle As New List(Of RequestDetail) 'webLuis
+
+            'Tb_Fecha.Text = Date.Now.Date.ToString("yyyy/MM/dd")
+            'Tb_Hora.Text = Now.Hour.ToString + ":" + Now.Minute.ToString
+
+            'ACTUALIZAR EL PROMEDIO DE CONSUMO
+            If _nuevoBasePeriodico = False Then
+                Dim prom As Integer
+                Dim dtClienteSelect As DataTable = L_GetCliente2(Tb_CliCod.Text).Tables(0)
+                If IsDBNull(dtClienteSelect.Rows(0).Item("ccprconsu")) = False Then
+                    prom = L_GetCliente2(Tb_CliCod.Text).Tables(0).Rows(0).Item("ccprconsu")
+                Else
+                    prom = 0
+                End If
+                Dim ultimaFechaPedido As Date = IIf(IsDBNull(dtClienteSelect.Rows(0).Item("ccultped")), Today.Date, dtClienteSelect.Rows(0).Item("ccultped"))
+                Dim diasTrans As Integer = DateDiff(DateInterval.Day, ultimaFechaPedido, Today.Date)
+                prom = (prom + diasTrans) / 2
+
+                L_GrabarModificarCliente("ccprconsu=" + Str(prom), "ccnumi=" + Str(Tb_CliCod.Text))
+                L_GrabarModificarCliente("ccultped='" + Today.Date.ToString("yyyy/MM/dd") + "'", "ccnumi=" + Str(Tb_CliCod.Text))
+                L_GrabarModificarCliente("ccultvent='" + Today.Date.ToString("yyyy/MM/dd") + "'", "ccnumi=" + Str(Tb_CliCod.Text))
+
+            End If
+
+            L_PedidoCabecera_Grabar(Tb_Id.Text, Date.Now.Date.ToString("yyyy/MM/dd"), Tb_Hora.Text, Tb_CliCod.Text, Tb_CliCodZona.Text, cbDistribuidor.Value.ToString, Tb_Observaciones.Text, IIf(_nuevoBasePeriodico = True, "10", "3"), "1", "0")
+            L_PedidoCabecera_GrabarExtencion(Tb_Id.Text, cbPreVendedor.Value.ToString, "2", "0")
+            If (swTipoVenta.Value = False) Then  ''''Grabar Credito
+                L_prCajaGrabarCredito(Tb_Id.Text, Double.Parse(tbMontoCredito.Text))
+            End If
+
+            L_prGrabarTO001C(Tb_Id.Text, cbPreVendedor.Value.ToString)
+            'Cambiar de zona al cliente a la zona del chofer
+            L_GrabarModificarCliente("cczona=" + Tb_CliCodZona.Text, "ccnumi=" + Str(Tb_CliCod.Text))
+
+            'grabar detalle
+            Dim codProd, cant, precio, subTotal As String
+            Dim i As Integer
+            For i = 0 To JGr_DetallePedido.RowCount - 1
+                JGr_DetallePedido.Row = i
+                codProd = JGr_DetallePedido.CurrentRow.Cells("CodProd").Value
+                cant = JGr_DetallePedido.CurrentRow.Cells("Cantidad").Value
+                precio = JGr_DetallePedido.CurrentRow.Cells("Precio").Value
+                subTotal = JGr_DetallePedido.CurrentRow.Cells("Monto").Value
+                L_PedidoDetalle_Grabar(Tb_Id.Text, codProd, cant, precio, subTotal)
+
+                'adiciono un objeto detalle
+                objListDetalle.Add(New RequestDetail(Tb_Id.Text, codProd, cant, precio, subTotal, L_ClaseGetProducto(codProd))) 'webLuis
+            Next
+
+            'VERIFICAR SI EL CLIENTE ESTABA PASIVO
+            If Tb_CliEstado.Text = "0" Then
+                L_GrabarModificarCliente("ccest=1", "ccnumi=" + Tb_CliCod.Text)
+            End If
+
+            'Grabar detalle de frecuencia del pedido
+            If _nuevoBasePeriodico = True Then
+                If Btn_Check1.Tag = 1 Then 'frecuencia por dias a la semana
+                    Dim diasSem As String = ""
+                    diasSem = IIf(CheckBoxX1.Checked = True, "1", "0") + diasSem
+                    diasSem = IIf(CheckBoxX2.Checked = True, "1", "0") + diasSem
+                    diasSem = IIf(CheckBoxX3.Checked = True, "1", "0") + diasSem
+                    diasSem = IIf(CheckBoxX4.Checked = True, "1", "0") + diasSem
+                    diasSem = IIf(CheckBoxX5.Checked = True, "1", "0") + diasSem
+                    diasSem = IIf(CheckBoxX6.Checked = True, "1", "0") + diasSem
+                    diasSem = IIf(CheckBoxX7.Checked = True, "1", "0") + diasSem
+
+                    L_PedidoDetalleFrecuencia_Grabar(Tb_Id.Text, diasSem, "0", "0")
+                Else
+                    If Btn_Check2.Tag = 1 Then 'frecuencia cada ciertos dias
+                        L_PedidoDetalleFrecuencia_Grabar(Tb_Id.Text, "0", Tb_FrecEnDias.Text, "0")
+                    Else 'frecuencia por dia del mes
+                        L_PedidoDetalleFrecuencia_Grabar(Tb_Id.Text, "0", "0", Tb_FrecMensual.Text)
+                    End If
+
+                End If
+
+            End If
+
+
+            'grabar estado del pedido
+            L_PedidoEstados_Grabar(Tb_Id.Text, IIf(_nuevoBasePeriodico = True, "10", "1"), Date.Now.Date.ToString("yyyy/MM/dd"), Tb_Hora.Text, gs_user)
+
+            ''actualizar el promedio de pedidos del cliente
+            ''If _nuevoBasePeriodico = False Then
+            ''    Dim prom As Integer
+            ''    If IsDBNull(L_GetCliente(Tb_CliCod.Text).Tables(0).Rows(0).Item("ccprconsu")) = False Then
+            ''        prom = L_GetCliente(Tb_CliCod.Text).Tables(0).Rows(0).Item("ccprconsu")
+            ''    Else
+            ''        prom = 0
+            ''    End If
+            ''    Dim dt As DataTable = L_PedidoCabecera_GeneralTop10(-1, " AND oaccli=" + Tb_CliCod.Text + " AND oaest>=1 AND oaest<=4 ")
+            ''    If dt.Rows.Count >= 2 Then
+            ''        Dim ultFechaPeddido As Date = dt.Rows(1).Item("oafdoc")
+            ''        Dim diasTrans As Integer = DateDiff(DateInterval.Day, ultFechaPeddido, Today.Date)
+            ''        prom = (prom + diasTrans) / 2
+            ''    Else
+            ''        prom = 0
+            ''    End If
+            ''    L_GrabarModificarCliente("ccprconsu=" + Str(prom), "ccnumi=" + Str(Tb_CliCod.Text))
+            ''End If
+
+            If (gi_notiPed = 1) Then
+                'webLuis-----------------'MANDAR LA NOTIFICACION DEL PEDIDO 'webLuis-----------------------------------------------
+                Dim objResult As New Result
+                Dim dtRepartidor As DataTable = L_ZonaDetalleRepartidor_General(-1, Tb_CliCodZona.Text).Tables(0)
+                Dim codRep As String = "-1"
+                If dtRepartidor.Rows.Count > 0 Then
+                    codRep = dtRepartidor.Rows(0).Item("lccbnumi")
+                End If
+                'Dim objPedido As New RequestHeader(Tb_Id.Text, Date.Now.Date.ToString("yyyy/MM/dd"), Tb_Hora.Text, Tb_CliCod.Text, Tb_CliCodZona.Text, codRep, Tb_Observaciones.Text, "", IIf(_nuevoBasePeriodico = True, "10", "1"), "1", "0", Date.Now.Date.ToString("yyyy/MM/dd"), Now.Hour.ToString + ":" + Now.Minute.ToString, gs_user, objListDetalle, L_ClaseGetCliente(Tb_CliCod.Text))
+                Dim objPedido As New RequestHeader(Tb_Id.Text, Date.Now.Date.ToString("yyyy-MM-dd"), Tb_Hora.Text, Tb_CliCod.Text, Tb_CliCodZona.Text, codRep, Tb_Observaciones.Text, "", IIf(_nuevoBasePeriodico = True, "10", "1"), "1", "0", Date.Now.Date.ToString("yyyy-MM-dd"), Now.Hour.ToString + ":" + Now.Minute.ToString, gs_user, objListDetalle, L_ClaseGetCliente(Tb_CliCod.Text))
+                Dim dtLlave As DataTable = L_TC0022General(codRep)
+                If dtLlave.Rows.Count > 0 Then
+                    Dim llaveRep As String = dtLlave(0).Item("ckidfsm")
+                    objResult.fcmToken = llaveRep
+                    objResult.mRequestHeader = objPedido
+                    Dim respuesta As Boolean = JsonApiClient._prMandarNotificacion(objResult) 'objResult
+                    If respuesta = False Then
+                        ''ToastNotification.Show(Me, "El Pedido no se pudo enviar a la app del repartidor".ToUpper, My.Resources.WARNING, 10000, eToastGlowColor.Red, eToastPosition.TopCenter)
+                    End If
+                Else
+                    ''ToastNotification.Show(Me, "no se pudo enviar el pedido al repartidor!!! , ".ToUpper + "el repartidor con codigo: ".ToUpper + codRep + " no tiene grabado su llave en la tabla TC0022", My.Resources.WARNING, 10000, eToastGlowColor.Red, eToastPosition.TopCenter)
+                End If
+                '---------------------------------------'webLuis-------------------------------------------------------------------
+
+            End If
+
+            If Not IsNothing(P_Global.Visualizador) Then
+                P_Global.Visualizador.Close()
+            End If
+            Dim dt As DataTable = L_prPedidoNotaVenta(Tb_Id.Text)
+
+            Dim _Hora As String = Now.Hour.ToString + ":" + Now.Minute.ToString
+            Dim _Total As Decimal = dt.Rows(0).Item("Total")
+            Dim _Decimal As Decimal = _Total - Math.Truncate(_Total)
+            Dim _TotalDeciaml As String = CDbl(_Decimal) * 100
+
+            Dim Literal As String = UConvertirLiteral.A_fnConvertirLiteral(CDbl(_Total) - CDbl(_Decimal)) + "  " + IIf(_TotalDeciaml.Equals("0"), "00", _TotalDeciaml) + "/100 Bolivianos"
+
+            P_Global.Visualizador = New Visualizador
+            Dim objrep As New DespachoNotaVentaXCliente
+
+            objrep.SetDataSource(dt)
+            objrep.SetParameterValue("Hora", _Hora)
+            objrep.SetParameterValue("Literal1", Literal)
+            objrep.SetParameterValue("Usuario", P_Global.gs_user)
+
+            objrep.PrintOptions.PrinterName = "EPSON TM-T2011 Receipt"
+            objrep.PrintToPrinter(1, False, 1, 1)
+
+            'ACTUALIZAR GRILLA DE BUSQUEDA
+            ''AC******************************_PCargarBuscador()
+
+            'Volver al foco para uno nuevo
+            Tb_Fecha.Focus()
+            ToastNotification.Show(Me, "Codigo de Pedido " + Tb_Id.Text + " Grabado con Exito.", My.Resources.GRABACION_EXITOSA, 5000, eToastGlowColor.Green, eToastPosition.BottomLeft)
+            _PLimpiar()
+
+            'ir a clientes
+            MSuperTabControlPrincipal.SelectedTabIndex = 2
+            JGr_Clientes.Focus()
+
+            'limpiar el buscador
+            JGr_Clientes.RemoveFilters()
+
+            JGr_Clientes.MoveTo(JGr_Clientes.FilterRow)
+            JGr_Clientes.Col = 1
+
+
+
+        End If
+    End Sub
+    Private Sub btnVentaDirecta_Click(sender As Object, e As EventArgs) Handles btnVentaDirecta.Click
+        _PGrabarRegistroDirecto()
     End Sub
 End Class
