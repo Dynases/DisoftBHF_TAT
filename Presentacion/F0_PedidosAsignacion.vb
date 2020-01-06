@@ -17,7 +17,7 @@ Public Class F0_PedidosAsignacion
     Dim _overlay2 As GMapOverlay
     Dim _overlay3 As GMapOverlay
     Dim _soloRepartidor As Integer = 1
-    Dim _colCkeck = 23 '21 '19
+    Dim _colCkeck = 24 '21 '19
 
     Public _nameButton As String
     Public _tab As SuperTabItem
@@ -195,7 +195,16 @@ Public Class F0_PedidosAsignacion
         objGrid.BoundMode = BoundMode.Bound
         objGrid.DataSource = dtReg
         objGrid.RetrieveStructure()
-
+        With objGrid.RootTable.Columns("monto")
+            .Width = 70
+            .Visible = True
+            .Caption = "SubTotal"
+            .FormatString = "0.00"
+            .HeaderAlignment = Janus.Windows.GridEX.TextAlignment.Center
+            .CellStyle.FontSize = gi_fuenteTamano
+            .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Far
+            .AggregateFunction = AggregateFunction.Sum
+        End With
         'dar formato a las columnas
         With objGrid.RootTable.Columns(0)
             .Caption = "Cod."
@@ -350,6 +359,9 @@ Public Class F0_PedidosAsignacion
             .FilterMode = FilterMode.Automatic
             .FilterRowUpdateMode = FilterRowUpdateMode.WhenValueChanges
             .GroupByBoxVisible = False
+            .TotalRow = InheritableBoolean.True
+            .TotalRowFormatStyle.BackColor = Color.Gold
+            .TotalRowPosition = TotalRowPosition.BottomFixed
             .VisualStyle = VisualStyle.Office2007
         End With
 
@@ -652,13 +664,16 @@ Public Class F0_PedidosAsignacion
             .CellStyle.FontSize = gi_fuenteTamano
             .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Far
             .FormatString = "0.00"
+            .AggregateFunction = AggregateFunction.Sum
         End With
 
         'Habilitar Filtradores
         With objGrid
             .GroupByBoxVisible = False
             '.FilterRowFormatStyle.BackColor = Color.Blue
-
+            .TotalRow = InheritableBoolean.True
+            .TotalRowFormatStyle.BackColor = Color.Gold
+            .TotalRowPosition = TotalRowPosition.BottomFixed
             'Diseño de la tabla
             .VisualStyle = VisualStyle.Office2007
         End With

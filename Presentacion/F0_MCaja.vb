@@ -478,7 +478,7 @@ Public Class F0_MCaja
             .Width = 120
             .AggregateFunction = AggregateFunction.Sum
             '.Visible = (gi_vcre2 = 1)
-            .Visible = False
+            .Visible = True
             .FormatString = "0.00"
         End With
         With grtotalpedidos.RootTable.Columns("oarepa")
@@ -572,7 +572,7 @@ Public Class F0_MCaja
             .Caption = "CREDITO"
             .Width = 120
             '.Visible = (gi_vcre2 = 1)
-            .Visible = False
+            .Visible = True
             .FormatString = "0.00"
             .AggregateFunction = AggregateFunction.Sum
         End With
@@ -1038,11 +1038,11 @@ Public Class F0_MCaja
     End Sub
 
     Private Sub grtotalpedidos_EditingCell(sender As Object, e As EditingCellEventArgs) Handles grtotalpedidos.EditingCell
-        If (e.Column.Key = "credito") Then
-            e.Cancel = False
-        Else
-            e.Cancel = True
-        End If
+        'If (e.Column.Key = "credito") Then
+        '    e.Cancel = False
+        'Else
+        e.Cancel = True
+        'End If
 
     End Sub
 

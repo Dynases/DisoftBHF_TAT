@@ -1822,19 +1822,47 @@ Public Class F02_Pedido
     End Sub
 
     Private Sub MBtPrimero_Click(sender As Object, e As EventArgs) Handles MBtPrimero.Click
-        _PPrimerRegistro()
+
+        Dim _MPos As Integer
+        If JGr_Buscador.RowCount > 0 Then
+            _MPos = 0
+            ''   _prMostrarRegistro(_MPos)
+            JGr_Buscador.Row = _MPos
+        End If
+        '' _PPrimerRegistro()
     End Sub
 
     Private Sub MBtAnterior_Click(sender As Object, e As EventArgs) Handles MBtAnterior.Click
-        _PAnteriorRegistro()
+
+        Dim _MPos As Integer = JGr_Buscador.Row
+        If _MPos > 0 And JGr_Buscador.RowCount > 0 Then
+            _MPos = _MPos - 1
+            ''  _prMostrarRegistro(_MPos)
+            JGr_Buscador.Row = _MPos
+        End If
+        ''   _PAnteriorRegistro()
     End Sub
 
     Private Sub MBtSiguiente_Click(sender As Object, e As EventArgs) Handles MBtSiguiente.Click
-        _PSiguienteRegistro()
+
+        Dim _pos As Integer = JGr_Buscador.Row
+        If _pos < JGr_Buscador.RowCount - 1 And _pos >= 0 Then
+            _pos = JGr_Buscador.Row + 1
+            '' _prMostrarRegistro(_pos)
+            JGr_Buscador.Row = _pos
+        End If
+        '' _PSiguienteRegistro()
     End Sub
 
     Private Sub MBtUltimo_Click(sender As Object, e As EventArgs) Handles MBtUltimo.Click
-        _PUltimoRegistro()
+        Dim _pos As Integer = JGr_Buscador.Row
+        If JGr_Buscador.RowCount > 0 Then
+            _pos = JGr_Buscador.RowCount - 1
+            ''  _prMostrarRegistro(_pos)
+            JGr_Buscador.Row = _pos
+        End If
+
+        ''_PUltimoRegistro()
     End Sub
 
     Private Sub MBtSalir_Click(sender As Object, e As EventArgs) Handles MBtSalir.Click
@@ -2067,8 +2095,8 @@ Public Class F02_Pedido
     Private Sub SuperTabControl1_SelectedTabChanged(sender As Object, e As SuperTabStripSelectedTabChangedEventArgs) Handles MSuperTabControlPrincipal.SelectedTabChanged 'SuperTabControl1.SelectedTabChanged
         If e.NewValue.ToString = "REGISTRO" And _Nuevo = False Then
             If JGr_Buscador.RowCount > 0 Then
-                _Pos = 0
-                _PMostrarRegistro(0)
+                '_Pos = 0
+                '_PMostrarRegistro(0)
             Else
                 MLbPaginacion.Text = 0
             End If
@@ -2242,5 +2270,18 @@ Public Class F02_Pedido
 
     Private Sub JGr_TipoProd_FormattingRow(sender As Object, e As RowLoadEventArgs) Handles JGr_TipoProd.FormattingRow
 
+    End Sub
+
+    Private Sub JGr_Buscador_SelectionChanged(sender As Object, e As EventArgs) Handles JGr_Buscador.SelectionChanged
+        If (JGr_Buscador.RowCount >= 0 And JGr_Buscador.Row >= 0) Then
+            _PMostrarRegistro(JGr_Buscador.Row)
+        End If
+
+    End Sub
+
+    Private Sub JGr_Buscador_KeyDown(sender As Object, e As KeyEventArgs) Handles JGr_Buscador.KeyDown
+        If e.KeyData = Keys.Enter Then
+            MSuperTabControlPrincipal.SelectedTabIndex = 0
+        End If
     End Sub
 End Class

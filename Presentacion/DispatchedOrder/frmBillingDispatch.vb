@@ -4,6 +4,10 @@ Imports ENTITY
 Imports Janus.Windows.GridEX
 Imports LOGIC
 Imports UTILITIES
+Imports Logica.AccesoLogica
+
+
+
 
 Public Class frmBillingDispatch
 
@@ -88,7 +92,47 @@ Public Class frmBillingDispatch
                 Throw New Exception("Debe seleccionar un chofer.")
             End If
 
+            Dim checks = Me.dgjPedido.GetCheckedRows()
+            Dim listIdPedido = checks.Select(Function(a) Convert.ToInt32(a.Cells("Id").Value)).ToList()
+
+            If (listIdPedido.Count = 0) Then
+                ToastNotification.Show(Me, "No Existe ningun dato a Facturar!!".ToUpper,
+                                    My.Resources.OK,
+                                    5 * 1000,
+                                    eToastGlowColor.Red,
+                                    eToastPosition.MiddleCenter)
+                Return
+            End If
             Dim listResult = New LPedido().ListarDespachoXClienteDeChofer(idChofer)
+            Dim listFiltrada = New LPedido().ListarDespachoXClienteDeChofer(idChofer)
+            listFiltrada.Clear()
+
+            Dim list2 As List(Of VPedido_BillingDispatch) = CType(dgjPedido.DataSource, List(Of VPedido_BillingDispatch))
+            Dim list1 As List(Of VPedido_BillingDispatch) = New List(Of VPedido_BillingDispatch)
+            ''Dim dtContenido As DataTable = CType(dgjPedido.DataSource, DataTable)
+            ''dt.Rows.Clear()
+
+
+            For i As Integer = 0 To list2.Count - 1 Step 1
+
+                For j As Integer = 0 To listIdPedido.Count - 1 Step 1
+                    If (list2(i).Id = listIdPedido(j)) Then
+                        list1.Add(list2(i))
+                    End If
+                Next
+            Next
+
+            For i As Integer = 0 To listResult.Count - 1 Step 1
+
+                For j As Integer = 0 To list1.Count - 1 Step 1
+
+                    If (listResult(i).ccdesc.Equals(list1(j).NombreCliente)) Then
+                        listFiltrada.Add(listResult(i))
+                    End If
+                Next
+            Next
+
+
             If (listResult.Count = 0) Then
                 Throw New Exception("No registros para generar el reporte.")
             End If
@@ -100,7 +144,7 @@ Public Class frmBillingDispatch
             P_Global.Visualizador = New Visualizador
             Dim objrep As New DespachoXCliente
 
-            objrep.SetDataSource(listResult)
+            objrep.SetDataSource(listFiltrada)
             objrep.SetParameterValue("nroDespacho", String.Empty)
             objrep.SetParameterValue("nombreDistribuidor", cbChoferes.Text)
             objrep.SetParameterValue("nombreUsuario", P_Global.gs_user)
@@ -123,8 +167,23 @@ Public Class frmBillingDispatch
                 Throw New Exception("Debe seleccionar un chofer.")
             End If
 
-            Dim listResult = New LPedido().ListarDespachoXProductoDeChofer(idChofer)
-            If (listResult.Count = 0) Then
+
+
+            Dim checks = Me.dgjPedido.GetCheckedRows()
+            Dim listIdPedido = checks.Select(Function(a) Convert.ToInt32(a.Cells("Id").Value)).ToList()
+
+
+
+            Dim dtList As DataTable = L_prTypeId()
+
+            For j As Integer = 0 To listIdPedido.Count - 1 Step 1
+
+                dtList.Rows.Add(listIdPedido(j))
+            Next
+
+            Dim dtResult As DataTable = L_prObtenerListado(dtList, idChofer)
+
+            If (dtResult.Rows.Count = 0) Then
                 Throw New Exception("No registros para generar el reporte.")
             End If
 
@@ -135,7 +194,7 @@ Public Class frmBillingDispatch
             P_Global.Visualizador = New Visualizador
             Dim objrep As New DespachoXProducto
 
-            objrep.SetDataSource(listResult)
+            objrep.SetDataSource(dtResult)
             objrep.SetParameterValue("nroDespacho", String.Empty)
             objrep.SetParameterValue("nombreDistribuidor", cbChoferes.Text)
             objrep.SetParameterValue("nombreUsuario", P_Global.gs_user)
@@ -165,6 +224,9 @@ Public Class frmBillingDispatch
 #Region "Privado, metodos y funciones"
     Private Sub Init()
         Try
+
+            ''L_prAbrirConexion()
+
             ConfigForm()
             CargarChoferes()
         Catch ex As Exception
@@ -375,6 +437,10 @@ Public Class frmBillingDispatch
         InitializeComponent()
 
         ' Add any initialization after the InitializeComponent() call.
+
+    End Sub
+
+    Private Sub ButtonX1_Click(sender As Object, e As EventArgs) Handles ButtonX1.Click
 
     End Sub
 #End Region
