@@ -250,13 +250,13 @@ Partial Class P_Principal
         'SideNav1
         '
         Me.SideNav1.BackColor = System.Drawing.Color.FromArgb(CType(CType(49, Byte), Integer), CType(CType(59, Byte), Integer), CType(CType(66, Byte), Integer))
+        Me.SideNav1.Controls.Add(Me.SideNavPanelVenta)
+        Me.SideNav1.Controls.Add(Me.SideNavPanelCompra)
+        Me.SideNav1.Controls.Add(Me.SideNavPanelRRHH)
+        Me.SideNav1.Controls.Add(Me.SideNavPanelInventario)
         Me.SideNav1.Controls.Add(Me.SideNavPanelPedido)
         Me.SideNav1.Controls.Add(Me.SideNavPanelLogistica)
-        Me.SideNav1.Controls.Add(Me.SideNavPanelVenta)
-        Me.SideNav1.Controls.Add(Me.SideNavPanelInventario)
-        Me.SideNav1.Controls.Add(Me.SideNavPanelCompra)
         Me.SideNav1.Controls.Add(Me.SideNavPaenlConf)
-        Me.SideNav1.Controls.Add(Me.SideNavPanelRRHH)
         Me.SideNav1.Controls.Add(Me.SideNavPanelCerrarSesion)
         Me.SideNav1.Controls.Add(Me.SideNavPanelVentana)
         Me.SideNav1.Controls.Add(Me.SideNavPanel1)
@@ -264,7 +264,7 @@ Partial Class P_Principal
         Me.SideNav1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.SideNav1.Items.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.SideNavItem1, Me.Separator1, Me.FP_Configuracion, Me.FP_Logistica, Me.FP_Pedido, Me.FP_Venta, Me.FP_Inventario, Me.FP_RecursosHumanos, Me.FP_Pedidos, Me.SideNavItem2, Me.FP_Compras, Me.Separator2, Me.FP_Ventana, Me.FP_CerrarSesion})
         Me.SideNav1.Location = New System.Drawing.Point(0, 0)
-        Me.SideNav1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.SideNav1.Margin = New System.Windows.Forms.Padding(4)
         Me.SideNav1.Name = "SideNav1"
         Me.SideNav1.Padding = New System.Windows.Forms.Padding(1)
         Me.SideNav1.Size = New System.Drawing.Size(1363, 741)
@@ -277,19 +277,20 @@ Partial Class P_Principal
         Me.SideNavPanelPedido.Controls.Add(Me.PictureBox03)
         Me.SideNavPanelPedido.Dock = System.Windows.Forms.DockStyle.Fill
         Me.SideNavPanelPedido.Location = New System.Drawing.Point(165, 40)
-        Me.SideNavPanelPedido.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.SideNavPanelPedido.Margin = New System.Windows.Forms.Padding(4)
         Me.SideNavPanelPedido.Name = "SideNavPanelPedido"
-        Me.SideNavPanelPedido.Size = New System.Drawing.Size(1192, 700)
+        Me.SideNavPanelPedido.Size = New System.Drawing.Size(1193, 700)
         Me.SideNavPanelPedido.TabIndex = 156
+        Me.SideNavPanelPedido.Visible = False
         '
         'PanelPedido
         '
         Me.PanelPedido.Controls.Add(Me.MetroTilePanelPedido)
         Me.PanelPedido.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PanelPedido.Location = New System.Drawing.Point(0, 0)
-        Me.PanelPedido.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.PanelPedido.Margin = New System.Windows.Forms.Padding(4)
         Me.PanelPedido.Name = "PanelPedido"
-        Me.PanelPedido.Size = New System.Drawing.Size(1192, 560)
+        Me.PanelPedido.Size = New System.Drawing.Size(1193, 560)
         Me.PanelPedido.TabIndex = 6
         '
         'MetroTilePanelPedido
@@ -311,10 +312,10 @@ Partial Class P_Principal
         Me.MetroTilePanelPedido.ItemSpacing = 10
         Me.MetroTilePanelPedido.LayoutOrientation = DevComponents.DotNetBar.eOrientation.Vertical
         Me.MetroTilePanelPedido.Location = New System.Drawing.Point(0, 0)
-        Me.MetroTilePanelPedido.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.MetroTilePanelPedido.Margin = New System.Windows.Forms.Padding(4)
         Me.MetroTilePanelPedido.MultiLine = True
         Me.MetroTilePanelPedido.Name = "MetroTilePanelPedido"
-        Me.MetroTilePanelPedido.Size = New System.Drawing.Size(1192, 560)
+        Me.MetroTilePanelPedido.Size = New System.Drawing.Size(1193, 560)
         Me.MetroTilePanelPedido.TabIndex = 2
         Me.MetroTilePanelPedido.Text = "mtp2Logistica"
         '
@@ -531,9 +532,9 @@ Partial Class P_Principal
         Me.PictureBox03.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.PictureBox03.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.PictureBox03.Location = New System.Drawing.Point(0, 560)
-        Me.PictureBox03.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.PictureBox03.Margin = New System.Windows.Forms.Padding(4)
         Me.PictureBox03.Name = "PictureBox03"
-        Me.PictureBox03.Size = New System.Drawing.Size(1192, 140)
+        Me.PictureBox03.Size = New System.Drawing.Size(1193, 140)
         Me.PictureBox03.TabIndex = 5
         Me.PictureBox03.TabStop = False
         Me.PictureBox03.Visible = False
@@ -544,7 +545,7 @@ Partial Class P_Principal
         Me.SideNavPanelLogistica.Controls.Add(Me.PictureBox02)
         Me.SideNavPanelLogistica.Dock = System.Windows.Forms.DockStyle.Fill
         Me.SideNavPanelLogistica.Location = New System.Drawing.Point(189, 44)
-        Me.SideNavPanelLogistica.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.SideNavPanelLogistica.Margin = New System.Windows.Forms.Padding(4)
         Me.SideNavPanelLogistica.Name = "SideNavPanelLogistica"
         Me.SideNavPanelLogistica.Size = New System.Drawing.Size(1167, 695)
         Me.SideNavPanelLogistica.TabIndex = 164
@@ -555,7 +556,7 @@ Partial Class P_Principal
         Me.PanelLogistica.Controls.Add(Me.MetroTilePanelLogistica)
         Me.PanelLogistica.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PanelLogistica.Location = New System.Drawing.Point(0, 0)
-        Me.PanelLogistica.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.PanelLogistica.Margin = New System.Windows.Forms.Padding(4)
         Me.PanelLogistica.Name = "PanelLogistica"
         Me.PanelLogistica.Size = New System.Drawing.Size(1167, 555)
         Me.PanelLogistica.TabIndex = 4
@@ -578,7 +579,7 @@ Partial Class P_Principal
         Me.MetroTilePanelLogistica.ItemSpacing = 10
         Me.MetroTilePanelLogistica.LayoutOrientation = DevComponents.DotNetBar.eOrientation.Vertical
         Me.MetroTilePanelLogistica.Location = New System.Drawing.Point(0, 0)
-        Me.MetroTilePanelLogistica.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.MetroTilePanelLogistica.Margin = New System.Windows.Forms.Padding(4)
         Me.MetroTilePanelLogistica.MultiLine = True
         Me.MetroTilePanelLogistica.Name = "MetroTilePanelLogistica"
         Me.MetroTilePanelLogistica.Size = New System.Drawing.Size(1167, 555)
@@ -755,7 +756,7 @@ Partial Class P_Principal
         Me.PictureBox02.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.PictureBox02.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.PictureBox02.Location = New System.Drawing.Point(0, 555)
-        Me.PictureBox02.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.PictureBox02.Margin = New System.Windows.Forms.Padding(4)
         Me.PictureBox02.Name = "PictureBox02"
         Me.PictureBox02.Size = New System.Drawing.Size(1167, 140)
         Me.PictureBox02.TabIndex = 5
@@ -767,21 +768,20 @@ Partial Class P_Principal
         Me.SideNavPanelVenta.Controls.Add(Me.PanelVenta)
         Me.SideNavPanelVenta.Controls.Add(Me.PictureBox04)
         Me.SideNavPanelVenta.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.SideNavPanelVenta.Location = New System.Drawing.Point(189, 44)
-        Me.SideNavPanelVenta.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.SideNavPanelVenta.Location = New System.Drawing.Point(165, 40)
+        Me.SideNavPanelVenta.Margin = New System.Windows.Forms.Padding(4)
         Me.SideNavPanelVenta.Name = "SideNavPanelVenta"
-        Me.SideNavPanelVenta.Size = New System.Drawing.Size(1167, 695)
+        Me.SideNavPanelVenta.Size = New System.Drawing.Size(1193, 700)
         Me.SideNavPanelVenta.TabIndex = 134
-        Me.SideNavPanelVenta.Visible = False
         '
         'PanelVenta
         '
         Me.PanelVenta.Controls.Add(Me.MetroTilePanelVenta)
         Me.PanelVenta.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PanelVenta.Location = New System.Drawing.Point(0, 0)
-        Me.PanelVenta.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.PanelVenta.Margin = New System.Windows.Forms.Padding(4)
         Me.PanelVenta.Name = "PanelVenta"
-        Me.PanelVenta.Size = New System.Drawing.Size(1167, 555)
+        Me.PanelVenta.Size = New System.Drawing.Size(1193, 560)
         Me.PanelVenta.TabIndex = 4
         '
         'MetroTilePanelVenta
@@ -801,10 +801,10 @@ Partial Class P_Principal
         Me.MetroTilePanelVenta.Items.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.ItemContainerVentTransacciones, Me.ItemContainerVentReportes, Me.btNotaVenta, Me.btVentaGeneral})
         Me.MetroTilePanelVenta.ItemSpacing = 10
         Me.MetroTilePanelVenta.Location = New System.Drawing.Point(0, 0)
-        Me.MetroTilePanelVenta.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.MetroTilePanelVenta.Margin = New System.Windows.Forms.Padding(4)
         Me.MetroTilePanelVenta.MultiLine = True
         Me.MetroTilePanelVenta.Name = "MetroTilePanelVenta"
-        Me.MetroTilePanelVenta.Size = New System.Drawing.Size(1167, 555)
+        Me.MetroTilePanelVenta.Size = New System.Drawing.Size(1193, 560)
         Me.MetroTilePanelVenta.TabIndex = 2
         Me.MetroTilePanelVenta.Text = "mtp2Logistica"
         '
@@ -1252,10 +1252,10 @@ Partial Class P_Principal
         '
         Me.PictureBox04.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.PictureBox04.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.PictureBox04.Location = New System.Drawing.Point(0, 555)
-        Me.PictureBox04.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.PictureBox04.Location = New System.Drawing.Point(0, 560)
+        Me.PictureBox04.Margin = New System.Windows.Forms.Padding(4)
         Me.PictureBox04.Name = "PictureBox04"
-        Me.PictureBox04.Size = New System.Drawing.Size(1167, 140)
+        Me.PictureBox04.Size = New System.Drawing.Size(1193, 140)
         Me.PictureBox04.TabIndex = 6
         Me.PictureBox04.TabStop = False
         Me.PictureBox04.Visible = False
@@ -1265,10 +1265,10 @@ Partial Class P_Principal
         Me.SideNavPanelInventario.Controls.Add(Me.PanelInventario)
         Me.SideNavPanelInventario.Controls.Add(Me.PictureBox06)
         Me.SideNavPanelInventario.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.SideNavPanelInventario.Location = New System.Drawing.Point(189, 44)
-        Me.SideNavPanelInventario.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.SideNavPanelInventario.Location = New System.Drawing.Point(165, 40)
+        Me.SideNavPanelInventario.Margin = New System.Windows.Forms.Padding(4)
         Me.SideNavPanelInventario.Name = "SideNavPanelInventario"
-        Me.SideNavPanelInventario.Size = New System.Drawing.Size(1167, 695)
+        Me.SideNavPanelInventario.Size = New System.Drawing.Size(1193, 700)
         Me.SideNavPanelInventario.TabIndex = 87
         Me.SideNavPanelInventario.Visible = False
         '
@@ -1277,9 +1277,9 @@ Partial Class P_Principal
         Me.PanelInventario.Controls.Add(Me.MetroTilePanelInventario)
         Me.PanelInventario.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PanelInventario.Location = New System.Drawing.Point(0, 0)
-        Me.PanelInventario.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.PanelInventario.Margin = New System.Windows.Forms.Padding(4)
         Me.PanelInventario.Name = "PanelInventario"
-        Me.PanelInventario.Size = New System.Drawing.Size(1167, 555)
+        Me.PanelInventario.Size = New System.Drawing.Size(1193, 560)
         Me.PanelInventario.TabIndex = 0
         '
         'MetroTilePanelInventario
@@ -1300,10 +1300,10 @@ Partial Class P_Principal
         Me.MetroTilePanelInventario.ItemSpacing = 10
         Me.MetroTilePanelInventario.LayoutOrientation = DevComponents.DotNetBar.eOrientation.Vertical
         Me.MetroTilePanelInventario.Location = New System.Drawing.Point(0, 0)
-        Me.MetroTilePanelInventario.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.MetroTilePanelInventario.Margin = New System.Windows.Forms.Padding(4)
         Me.MetroTilePanelInventario.MultiLine = True
         Me.MetroTilePanelInventario.Name = "MetroTilePanelInventario"
-        Me.MetroTilePanelInventario.Size = New System.Drawing.Size(1167, 555)
+        Me.MetroTilePanelInventario.Size = New System.Drawing.Size(1193, 560)
         Me.MetroTilePanelInventario.TabIndex = 2
         Me.MetroTilePanelInventario.Text = "mtp2Logistica"
         '
@@ -1559,10 +1559,10 @@ Partial Class P_Principal
         '
         Me.PictureBox06.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.PictureBox06.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.PictureBox06.Location = New System.Drawing.Point(0, 555)
-        Me.PictureBox06.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.PictureBox06.Location = New System.Drawing.Point(0, 560)
+        Me.PictureBox06.Margin = New System.Windows.Forms.Padding(4)
         Me.PictureBox06.Name = "PictureBox06"
-        Me.PictureBox06.Size = New System.Drawing.Size(1167, 140)
+        Me.PictureBox06.Size = New System.Drawing.Size(1193, 140)
         Me.PictureBox06.TabIndex = 8
         Me.PictureBox06.TabStop = False
         Me.PictureBox06.Visible = False
@@ -1572,10 +1572,10 @@ Partial Class P_Principal
         Me.SideNavPanelCompra.Controls.Add(Me.PanelCompra)
         Me.SideNavPanelCompra.Controls.Add(Me.PictureBox07)
         Me.SideNavPanelCompra.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.SideNavPanelCompra.Location = New System.Drawing.Point(189, 44)
-        Me.SideNavPanelCompra.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.SideNavPanelCompra.Location = New System.Drawing.Point(165, 40)
+        Me.SideNavPanelCompra.Margin = New System.Windows.Forms.Padding(4)
         Me.SideNavPanelCompra.Name = "SideNavPanelCompra"
-        Me.SideNavPanelCompra.Size = New System.Drawing.Size(1167, 695)
+        Me.SideNavPanelCompra.Size = New System.Drawing.Size(1193, 700)
         Me.SideNavPanelCompra.TabIndex = 109
         Me.SideNavPanelCompra.Visible = False
         '
@@ -1584,9 +1584,9 @@ Partial Class P_Principal
         Me.PanelCompra.Controls.Add(Me.MetroTilePanelCompra)
         Me.PanelCompra.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PanelCompra.Location = New System.Drawing.Point(0, 0)
-        Me.PanelCompra.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.PanelCompra.Margin = New System.Windows.Forms.Padding(4)
         Me.PanelCompra.Name = "PanelCompra"
-        Me.PanelCompra.Size = New System.Drawing.Size(1167, 555)
+        Me.PanelCompra.Size = New System.Drawing.Size(1193, 560)
         Me.PanelCompra.TabIndex = 1
         '
         'MetroTilePanelCompra
@@ -1607,10 +1607,10 @@ Partial Class P_Principal
         Me.MetroTilePanelCompra.ItemSpacing = 10
         Me.MetroTilePanelCompra.LayoutOrientation = DevComponents.DotNetBar.eOrientation.Vertical
         Me.MetroTilePanelCompra.Location = New System.Drawing.Point(0, 0)
-        Me.MetroTilePanelCompra.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.MetroTilePanelCompra.Margin = New System.Windows.Forms.Padding(4)
         Me.MetroTilePanelCompra.MultiLine = True
         Me.MetroTilePanelCompra.Name = "MetroTilePanelCompra"
-        Me.MetroTilePanelCompra.Size = New System.Drawing.Size(1167, 555)
+        Me.MetroTilePanelCompra.Size = New System.Drawing.Size(1193, 560)
         Me.MetroTilePanelCompra.TabIndex = 2
         Me.MetroTilePanelCompra.Text = "mtp2Logistica"
         '
@@ -1746,10 +1746,10 @@ Partial Class P_Principal
         '
         Me.PictureBox07.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.PictureBox07.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.PictureBox07.Location = New System.Drawing.Point(0, 555)
-        Me.PictureBox07.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.PictureBox07.Location = New System.Drawing.Point(0, 560)
+        Me.PictureBox07.Margin = New System.Windows.Forms.Padding(4)
         Me.PictureBox07.Name = "PictureBox07"
-        Me.PictureBox07.Size = New System.Drawing.Size(1167, 140)
+        Me.PictureBox07.Size = New System.Drawing.Size(1193, 140)
         Me.PictureBox07.TabIndex = 8
         Me.PictureBox07.TabStop = False
         Me.PictureBox07.Visible = False
@@ -1760,7 +1760,7 @@ Partial Class P_Principal
         Me.SideNavPaenlConf.Controls.Add(Me.PictureBox01)
         Me.SideNavPaenlConf.Dock = System.Windows.Forms.DockStyle.Fill
         Me.SideNavPaenlConf.Location = New System.Drawing.Point(189, 44)
-        Me.SideNavPaenlConf.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.SideNavPaenlConf.Margin = New System.Windows.Forms.Padding(4)
         Me.SideNavPaenlConf.Name = "SideNavPaenlConf"
         Me.SideNavPaenlConf.Size = New System.Drawing.Size(1167, 695)
         Me.SideNavPaenlConf.TabIndex = 2
@@ -1771,7 +1771,7 @@ Partial Class P_Principal
         Me.PanelConf.Controls.Add(Me.MetroTilePanelConf)
         Me.PanelConf.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PanelConf.Location = New System.Drawing.Point(0, 0)
-        Me.PanelConf.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.PanelConf.Margin = New System.Windows.Forms.Padding(4)
         Me.PanelConf.Name = "PanelConf"
         Me.PanelConf.Size = New System.Drawing.Size(1167, 555)
         Me.PanelConf.TabIndex = 3
@@ -1794,7 +1794,7 @@ Partial Class P_Principal
         Me.MetroTilePanelConf.ItemSpacing = 10
         Me.MetroTilePanelConf.LayoutOrientation = DevComponents.DotNetBar.eOrientation.Vertical
         Me.MetroTilePanelConf.Location = New System.Drawing.Point(0, 0)
-        Me.MetroTilePanelConf.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.MetroTilePanelConf.Margin = New System.Windows.Forms.Padding(4)
         Me.MetroTilePanelConf.MultiLine = True
         Me.MetroTilePanelConf.Name = "MetroTilePanelConf"
         Me.MetroTilePanelConf.Size = New System.Drawing.Size(1167, 555)
@@ -2062,7 +2062,7 @@ Partial Class P_Principal
         Me.PictureBox01.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.PictureBox01.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.PictureBox01.Location = New System.Drawing.Point(0, 555)
-        Me.PictureBox01.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.PictureBox01.Margin = New System.Windows.Forms.Padding(4)
         Me.PictureBox01.Name = "PictureBox01"
         Me.PictureBox01.Size = New System.Drawing.Size(1167, 140)
         Me.PictureBox01.TabIndex = 2
@@ -2074,10 +2074,10 @@ Partial Class P_Principal
         Me.SideNavPanelRRHH.Controls.Add(Me.PanelRRHH)
         Me.SideNavPanelRRHH.Controls.Add(Me.PictureBox05)
         Me.SideNavPanelRRHH.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.SideNavPanelRRHH.Location = New System.Drawing.Point(189, 44)
-        Me.SideNavPanelRRHH.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.SideNavPanelRRHH.Location = New System.Drawing.Point(165, 40)
+        Me.SideNavPanelRRHH.Margin = New System.Windows.Forms.Padding(4)
         Me.SideNavPanelRRHH.Name = "SideNavPanelRRHH"
-        Me.SideNavPanelRRHH.Size = New System.Drawing.Size(1167, 695)
+        Me.SideNavPanelRRHH.Size = New System.Drawing.Size(1193, 700)
         Me.SideNavPanelRRHH.TabIndex = 160
         Me.SideNavPanelRRHH.Visible = False
         '
@@ -2086,9 +2086,9 @@ Partial Class P_Principal
         Me.PanelRRHH.Controls.Add(Me.MetroTilePanelRRHH)
         Me.PanelRRHH.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PanelRRHH.Location = New System.Drawing.Point(0, 0)
-        Me.PanelRRHH.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.PanelRRHH.Margin = New System.Windows.Forms.Padding(4)
         Me.PanelRRHH.Name = "PanelRRHH"
-        Me.PanelRRHH.Size = New System.Drawing.Size(1167, 555)
+        Me.PanelRRHH.Size = New System.Drawing.Size(1193, 560)
         Me.PanelRRHH.TabIndex = 5
         '
         'MetroTilePanelRRHH
@@ -2109,10 +2109,10 @@ Partial Class P_Principal
         Me.MetroTilePanelRRHH.ItemSpacing = 10
         Me.MetroTilePanelRRHH.LayoutOrientation = DevComponents.DotNetBar.eOrientation.Vertical
         Me.MetroTilePanelRRHH.Location = New System.Drawing.Point(0, 0)
-        Me.MetroTilePanelRRHH.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.MetroTilePanelRRHH.Margin = New System.Windows.Forms.Padding(4)
         Me.MetroTilePanelRRHH.MultiLine = True
         Me.MetroTilePanelRRHH.Name = "MetroTilePanelRRHH"
-        Me.MetroTilePanelRRHH.Size = New System.Drawing.Size(1167, 555)
+        Me.MetroTilePanelRRHH.Size = New System.Drawing.Size(1193, 560)
         Me.MetroTilePanelRRHH.TabIndex = 2
         Me.MetroTilePanelRRHH.Text = "mtp2Logistica"
         '
@@ -2251,10 +2251,10 @@ Partial Class P_Principal
         '
         Me.PictureBox05.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.PictureBox05.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.PictureBox05.Location = New System.Drawing.Point(0, 555)
-        Me.PictureBox05.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.PictureBox05.Location = New System.Drawing.Point(0, 560)
+        Me.PictureBox05.Margin = New System.Windows.Forms.Padding(4)
         Me.PictureBox05.Name = "PictureBox05"
-        Me.PictureBox05.Size = New System.Drawing.Size(1167, 140)
+        Me.PictureBox05.Size = New System.Drawing.Size(1193, 140)
         Me.PictureBox05.TabIndex = 7
         Me.PictureBox05.TabStop = False
         Me.PictureBox05.Visible = False
@@ -2263,7 +2263,7 @@ Partial Class P_Principal
         '
         Me.SideNavPanelCerrarSesion.Dock = System.Windows.Forms.DockStyle.Fill
         Me.SideNavPanelCerrarSesion.Location = New System.Drawing.Point(189, 44)
-        Me.SideNavPanelCerrarSesion.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.SideNavPanelCerrarSesion.Margin = New System.Windows.Forms.Padding(4)
         Me.SideNavPanelCerrarSesion.Name = "SideNavPanelCerrarSesion"
         Me.SideNavPanelCerrarSesion.Size = New System.Drawing.Size(1167, 695)
         Me.SideNavPanelCerrarSesion.TabIndex = 77
@@ -2274,7 +2274,7 @@ Partial Class P_Principal
         Me.SideNavPanelVentana.Controls.Add(Me.superTabControlVentana)
         Me.SideNavPanelVentana.Dock = System.Windows.Forms.DockStyle.Fill
         Me.SideNavPanelVentana.Location = New System.Drawing.Point(165, 39)
-        Me.SideNavPanelVentana.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.SideNavPanelVentana.Margin = New System.Windows.Forms.Padding(4)
         Me.SideNavPanelVentana.Name = "SideNavPanelVentana"
         Me.SideNavPanelVentana.Size = New System.Drawing.Size(1200, 709)
         Me.SideNavPanelVentana.TabIndex = 73
@@ -2300,7 +2300,7 @@ Partial Class P_Principal
         Me.superTabControlVentana.Controls.Add(Me.PanelPrincipal)
         Me.superTabControlVentana.Dock = System.Windows.Forms.DockStyle.Fill
         Me.superTabControlVentana.Location = New System.Drawing.Point(0, 0)
-        Me.superTabControlVentana.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.superTabControlVentana.Margin = New System.Windows.Forms.Padding(4)
         Me.superTabControlVentana.Name = "superTabControlVentana"
         Me.superTabControlVentana.ReorderTabsEnabled = True
         Me.superTabControlVentana.SelectedTabFont = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
@@ -2318,7 +2318,7 @@ Partial Class P_Principal
         Me.PanelPrincipal.BackColor = System.Drawing.SystemColors.Control
         Me.PanelPrincipal.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PanelPrincipal.Location = New System.Drawing.Point(0, 0)
-        Me.PanelPrincipal.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.PanelPrincipal.Margin = New System.Windows.Forms.Padding(4)
         Me.PanelPrincipal.Name = "PanelPrincipal"
         Me.PanelPrincipal.Size = New System.Drawing.Size(1200, 709)
         Me.PanelPrincipal.TabIndex = 1
@@ -2329,7 +2329,7 @@ Partial Class P_Principal
         Me.SideNavPanel1.Controls.Add(Me.PictureBox1)
         Me.SideNavPanel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.SideNavPanel1.Location = New System.Drawing.Point(-32805, 32672)
-        Me.SideNavPanel1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.SideNavPanel1.Margin = New System.Windows.Forms.Padding(4)
         Me.SideNavPanel1.Name = "SideNavPanel1"
         Me.SideNavPanel1.Size = New System.Drawing.Size(812, 645)
         Me.SideNavPanel1.TabIndex = 66
@@ -2351,7 +2351,7 @@ Partial Class P_Principal
         Me.MetroTilePanel4.Items.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btSocSocio, Me.btSocPagos, Me.ItemContainer2})
         Me.MetroTilePanel4.ItemSpacing = 10
         Me.MetroTilePanel4.Location = New System.Drawing.Point(0, 0)
-        Me.MetroTilePanel4.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.MetroTilePanel4.Margin = New System.Windows.Forms.Padding(4)
         Me.MetroTilePanel4.MultiLine = True
         Me.MetroTilePanel4.Name = "MetroTilePanel4"
         Me.MetroTilePanel4.Size = New System.Drawing.Size(812, 505)
@@ -2500,7 +2500,7 @@ Partial Class P_Principal
         Me.PictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.PictureBox1.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.PictureBox1.Location = New System.Drawing.Point(0, 505)
-        Me.PictureBox1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.PictureBox1.Margin = New System.Windows.Forms.Padding(4)
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.Size = New System.Drawing.Size(812, 140)
         Me.PictureBox1.TabIndex = 3
@@ -2513,7 +2513,7 @@ Partial Class P_Principal
         Me.SideNavPanel2.Controls.Add(Me.PictureBox2)
         Me.SideNavPanel2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.SideNavPanel2.Location = New System.Drawing.Point(227, 44)
-        Me.SideNavPanel2.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.SideNavPanel2.Margin = New System.Windows.Forms.Padding(4)
         Me.SideNavPanel2.Name = "SideNavPanel2"
         Me.SideNavPanel2.Size = New System.Drawing.Size(812, 645)
         Me.SideNavPanel2.TabIndex = 56
@@ -2535,7 +2535,7 @@ Partial Class P_Principal
         Me.MetroTilePanel3.Items.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btEscVehiculo, Me.btEscAlumnos, Me.btEscEquipos, Me.btEscClaPracticas, Me.btEscInscripciones, Me.btEscPreExamen, Me.btEscClasesTeoricas, Me.ItemContainer1})
         Me.MetroTilePanel3.ItemSpacing = 10
         Me.MetroTilePanel3.Location = New System.Drawing.Point(0, 0)
-        Me.MetroTilePanel3.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.MetroTilePanel3.Margin = New System.Windows.Forms.Padding(4)
         Me.MetroTilePanel3.MultiLine = True
         Me.MetroTilePanel3.Name = "MetroTilePanel3"
         Me.MetroTilePanel3.Size = New System.Drawing.Size(812, 505)
@@ -2706,7 +2706,7 @@ Partial Class P_Principal
         Me.PictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.PictureBox2.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.PictureBox2.Location = New System.Drawing.Point(0, 505)
-        Me.PictureBox2.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.PictureBox2.Margin = New System.Windows.Forms.Padding(4)
         Me.PictureBox2.Name = "PictureBox2"
         Me.PictureBox2.Size = New System.Drawing.Size(812, 140)
         Me.PictureBox2.TabIndex = 3
@@ -2748,7 +2748,6 @@ Partial Class P_Principal
         '
         'FP_Pedido
         '
-        Me.FP_Pedido.Checked = True
         Me.FP_Pedido.Name = "FP_Pedido"
         Me.FP_Pedido.Panel = Me.SideNavPanelPedido
         Me.FP_Pedido.Symbol = ""
@@ -2756,6 +2755,7 @@ Partial Class P_Principal
         '
         'FP_Venta
         '
+        Me.FP_Venta.Checked = True
         Me.FP_Venta.Name = "FP_Venta"
         Me.FP_Venta.Panel = Me.SideNavPanelVenta
         Me.FP_Venta.Symbol = ""
@@ -2926,7 +2926,7 @@ Partial Class P_Principal
         Me.rmSesion.Diameter = 200
         Me.rmSesion.Items.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btCerrarSesion, Me.btSalir, Me.btAbout})
         Me.rmSesion.Location = New System.Drawing.Point(61, 672)
-        Me.rmSesion.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.rmSesion.Margin = New System.Windows.Forms.Padding(4)
         Me.rmSesion.Name = "rmSesion"
         Me.rmSesion.Size = New System.Drawing.Size(67, 62)
         Me.rmSesion.Symbol = ""
@@ -2962,7 +2962,7 @@ Partial Class P_Principal
         Me.lbUsuario.Border.Class = "TextBoxBorder"
         Me.lbUsuario.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.lbUsuario.Location = New System.Drawing.Point(16, 746)
-        Me.lbUsuario.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.lbUsuario.Margin = New System.Windows.Forms.Padding(4)
         Me.lbUsuario.Name = "lbUsuario"
         Me.lbUsuario.PreventEnterBeep = True
         Me.lbUsuario.ReadOnly = True
@@ -3050,7 +3050,7 @@ Partial Class P_Principal
         Me.Controls.Add(Me.rmSesion)
         Me.Controls.Add(Me.SideNav1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
-        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Margin = New System.Windows.Forms.Padding(4)
         Me.Name = "P_Principal"
         Me.SideNav1.ResumeLayout(False)
         Me.SideNav1.PerformLayout()
