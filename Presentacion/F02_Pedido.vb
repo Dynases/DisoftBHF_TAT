@@ -1492,6 +1492,8 @@ Public Class F02_Pedido
             ''AC******************************_PCargarBuscador()
 
             'Volver al foco para uno nuevo
+            _PCargarBuscador()
+
             Tb_Fecha.Focus()
             ToastNotification.Show(Me, "Codigo de Pedido " + Tb_Id.Text + " Grabado con Exito.", My.Resources.GRABACION_EXITOSA, 5000, eToastGlowColor.Green, eToastPosition.BottomLeft)
             _PLimpiar()
@@ -1548,7 +1550,7 @@ Public Class F02_Pedido
                 End If
 
             End If
-
+            _PCargarBuscador()
             ToastNotification.Show(Me, "Codigo de Pedido " + Tb_Id.Text + " Modificado con Exito.", My.Resources.GRABACION_EXITOSA, 5000, eToastGlowColor.Green, eToastPosition.BottomLeft)
             '_Deshabilitar()
 
