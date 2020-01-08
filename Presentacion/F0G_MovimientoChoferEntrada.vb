@@ -349,7 +349,11 @@ Public Class F0G_MovimientoChoferEntrada
         Dim detalleCopia As DataTable = L_prMovimientoChoferDetalleSalida(-1)
         For i As Integer = 0 To CType(grdetalle.DataSource, DataTable).Rows.Count - 1 Step 1
             'icid,icibid,iccprod ,iccant
-            Dim data As Decimal = IIf(IsDBNull(CType(grdetalle.DataSource, DataTable).Rows(i).Item("DEVOLUCION")), 0, CType(grdetalle.DataSource, DataTable).Rows(i).Item("DEVOLUCION"))
+            Dim data As Decimal = IIf(IsDBNull(CType(grdetalle.DataSource, DataTable).Rows(i).Item("DEVOLUCION")),
+                                      0, CType(grdetalle.DataSource, DataTable).Rows(i).Item("DEVOLUCION"))
+            If (data > 0) Then
+                CType(grdetalle.DataSource, DataTable).Rows(i).Item("estado") = 2
+            End If
             Dim estado As Integer = IIf(IsDBNull(CType(grdetalle.DataSource, DataTable).Rows(i).Item("estado")), 0, CType(grdetalle.DataSource, DataTable).Rows(i).Item("estado"))
             'a.icid ,a.icibid ,a.iccprod ,b.cadesc as producto,a.iccant ,Cast(null as image ) as img,1 as estado
             If (estado = 2) Then
